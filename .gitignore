@@ -193,4 +193,5 @@ _reference/
 .vscode/
 .github/
 .DS_Store
+**/.DS_Store
 src/
