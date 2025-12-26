@@ -1,0 +1,23 @@
+{
+  "title": "Mitt Psyke",
+  "author": "Robert Claesson",
+  "tagline": "Ditt stöd – på dina villkor",
+  "description": "En samling stödlinjer och resurser för psykisk hälsa i Sverige",
+  "url": "https://mittpsyke.se",
+  "lang": "sv",
+  "supportRelevance": {
+    "limit": 6,
+    "broadTags": [
+      "psykiskohalsa",
+      "samtal",
+      "anonymt",
+      "webb",
+      "telefon",
+      "chatt",
+      "sms",
+      "mejl",
+      "e-post"
+    ],
+    "allowCategoryFallback": true
+  }
+}

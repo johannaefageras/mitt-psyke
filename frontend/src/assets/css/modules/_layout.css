@@ -1,0 +1,196 @@
+/* ==========================================================================
+   Layout
+   
+   Container, page structure, and grid utilities.
+   ========================================================================== */
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-inline: var(--space-md);
+  }
+}
+
+/* ==========================================================================
+   Page Layout
+   ========================================================================== */
+
+.page {
+  padding: var(--space-2xl) 0 var(--space-3xl);
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+}
+
+.page-header {
+  margin-bottom: var(--space-lg);
+}
+
+.page-header h1 {
+  margin-bottom: var(--space-sm);
+}
+
+.page-content {
+  max-width: 700px;
+}
+
+.page-content--wide {
+  max-width: none;
+}
+
+.page-intro {
+  max-width: 700px;
+}
+
+.page-content h2 {
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-md);
+}
+
+.page-content h3 {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-sm);
+}
+
+.page-content ul,
+.page-content ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-xl);
+}
+
+.page-content li {
+  margin-bottom: var(--space-sm);
+}
+
+/* ==========================================================================
+   Section Spacing
+   ========================================================================== */
+
+.auth-section,
+.profile-section,
+.journal-section,
+.contacts-section {
+  padding: var(--space-2xl) 0 var(--space-3xl);
+}
+
+/* ==========================================================================
+   Grid Layouts
+   ========================================================================== */
+
+/* Two-column profile/journal grid */
+.profile-grid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.profile-main {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.profile-sidebar {
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* Journal grid variants */
+.journal-grid {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+}
+
+.journal-grid--wide {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+}
+
+/* Profile edit grid */
+.profile-edit-grid,
+.profile-edit-layout {
+  display: grid;
+  gap: var(--space-xl);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+  align-items: start;
+}
+
+.profile-edit-layout {
+  max-width: none;
+}
+
+/* ==========================================================================
+   Responsive Grid Adjustments
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .profile-grid,
+  .profile-edit-grid,
+  .profile-edit-layout,
+  .journal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar {
+    order: -1;
+  }
+}
+
+/* ==========================================================================
+   Auth Shell (centered card layout)
+   ========================================================================== */
+
+.auth-shell {
+  max-width: 560px;
+  margin: 0 auto;
+  display: grid;
+  gap: var(--space-lg);
+}
+
+/* ==========================================================================
+   Portal Layout
+   ========================================================================== */
+
+.portal-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+  margin-bottom: var(--space-3xl);
+}
+
+@media (min-width: 1024px) {
+  .portal-layout {
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+}
+
+.portal-article {
+  max-width: 740px;
+}
+
+.portal-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 1024px) {
+  .portal-aside {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-lg));
+  }
+}

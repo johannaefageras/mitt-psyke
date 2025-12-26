@@ -1,0 +1,6 @@
+{
+  "layout": "layouts/portal.njk",
+  "tags": ["portal"],
+  "permalink": "/portaler/{{ page.fileSlug }}/"
+}
+

@@ -1,0 +1,57 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-block">
+        <h3 class="footer-heading">
+          {% icon "info-circle", "footer-heading-icon" %}
+          <span>Om {{ site.title }}</span>
+        </h3>
+        <p>En samling svenska stödlinjer och resurser för psykisk hälsa – på ett ställe. Kontrollera alltid aktuella tider på respektive webbplats.</p>
+      </div>
+
+      <div class="footer-block">
+        <h3 class="footer-heading">
+          {% icon "pin-1", "footer-heading-icon" %}
+          <span>Snabblänkar</span>
+        </h3>
+        <ul class="footer-links">
+          {% for item in navigation.footer %}
+          <li><a href="{{ item.url }}">{{ item.text }}</a></li>
+          {% endfor %}
+          <li><a href="/stodlinjer/">Alla stödlinjer</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-block">
+        <h3 class="footer-heading">
+          {% icon "phone-emergency", "footer-heading-icon" %}
+          <span>Akut hjälp</span>
+        </h3>
+        <ul class="footer-links footer-emergency">
+          {% for hotline in hotlines %}
+          <li><a href="tel:{{ hotline.tel }}"><strong>{{ hotline.number }}</strong> – {{ hotline.footerLabel or hotline.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="footer-block">
+        <h3 class="footer-heading">
+          {% icon "scale", "footer-heading-icon" %}
+          <span>Viktiga Sidor</span>
+        </h3>
+        <ul class="footer-links">
+          {% for item in importantPagesNav %}
+          <li><a href="{{ item.url }}">{{ item.text }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">Upphovsrätt © {% year %} {{ site.title }}</p>
+      <p class="disclaimer">
+        {{ site.title }} är en informationssida och ersätter inte professionell vård.
+      </p>
+    </div>
+  </div>
+</footer>

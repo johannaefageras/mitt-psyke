@@ -1,0 +1,61 @@
+---
+layout: layouts/base.njk
+title: Ditt stöd – på dina villkor
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1>{{ site.title }}</h1>
+      <p class="tagline">{{ site.tagline }}</p>
+
+      {# Akuta linjer - alltid synliga #}
+      <div class="hotline-grid" style="margin-bottom: var(--space-2xl);">
+        {% include "partials/hotline-cards.njk" %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container" style="padding-bottom: var(--space-3xl);">
+  <h2 style="text-align: center; margin-bottom: var(--space-xl);">Vad kämpar du med?</h2>
+
+  <div class="portal-grid">
+    {% for portal in collections.portaler %}
+    <a href="{{ portal.url }}" class="portal-card">
+      <span class="portal-card-icon">{% icon portal.data.icon, "portal-card-icon-glyph" %}</span>
+      <h3>{{ portal.data.title }}</h3>
+      <p class="portal-card-description">{{ portal.data.description | truncateWords(15) }}</p>
+      <span class="portal-card-link">
+        <span>Läs mer</span>
+        {% icon "arrow-right", "portal-card-link-icon" %}
+      </span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+{# Citat #}
+{% set randomQuote = quotes | random %}
+<section class="quote-section">
+  <div class="container">
+    <blockquote class="quote">
+      <p>"{{ randomQuote.text }}"</p>
+      <cite>— {{ randomQuote.author }}</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section class="container" style="padding: var(--space-3xl) 0;">
+  <h2 style="text-align: center; margin-bottom: var(--space-xl);">Alla stödlinjer</h2>
+
+  <div class="support-grid">
+    {% for line in supportlines | selectattr("urgent") %}
+    {% include "partials/support-card.njk" %}
+    {% endfor %}
+  </div>
+
+  <p style="text-align: center; margin-top: var(--space-xl);">
+    <a href="/stodlinjer/" style="font-weight: 600;">Se alla {{ supportlines | length }} stödlinjer →</a>
+  </p>
+</section>

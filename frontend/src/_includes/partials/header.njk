@@ -1,0 +1,40 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="site-logo">
+      Mitt<span>Psyke</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Huvudnavigation">
+      <ul class="nav-list">
+        {% for item in navigation.main %}
+        <li>
+          <a href="{{ item.url }}"
+             class="nav-link{% if page.url == item.url or (item.url != '/' and page.url.startsWith(item.url)) %} is-active{% endif %}">
+            {{ item.text }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="/accounts/login/" class="icon-button" aria-label="Logga in" data-auth-nav="login">
+        {% icon "login-2" %}
+      </a>
+      <a href="/accounts/profile/" class="icon-button" aria-label="Min profil" data-auth-nav="profile" hidden>
+        {% icon "user" %}
+      </a>
+
+      <span class="header-separator"></span>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Byt tema">
+        {% icon "sun", "theme-icon sun" %}
+        {% icon "moon", "theme-icon moon" %}
+      </button>
+
+      <button class="nav-toggle" aria-label="Öppna meny" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+    </div>
+  </div>
+</header>

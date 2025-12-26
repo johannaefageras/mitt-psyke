@@ -1,0 +1,17 @@
+<figure class="quote-block" role="figure" aria-label="Uppmuntrande citat">
+  <span class="quote-mark">"</span>
+  <blockquote id="dailyQuote" class="quote-text">
+    <p>Ibland är det viktigaste modet att fortsätta en dag till.</p>
+  </blockquote>
+  <figcaption id="quoteAuthor" class="quote-author">– Karin Boye</figcaption>
+</figure>
+
+<script>
+  // Visa slumpmässigt citat
+  const quotes = {{ quotes | dump | safe }};
+  if (quotes && quotes.length > 0) {
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    document.getElementById('dailyQuote').querySelector('p').textContent = randomQuote.text;
+    document.getElementById('quoteAuthor').textContent = '– ' + randomQuote.author;
+  }
+</script>

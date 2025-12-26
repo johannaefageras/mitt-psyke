@@ -1,0 +1,295 @@
+/* ==========================================================================
+   Support Pages
+   
+   Support lines page specific styles: search, filters, results, FAQ.
+   ========================================================================== */
+
+/* ==========================================================================
+   Support Lines Page
+   ========================================================================== */
+
+.support-lines-page {
+  /* Layout handled by child elements */
+}
+
+.support-lines-header {
+  margin-bottom: var(--space-2xl);
+}
+
+/* ==========================================================================
+   Support Filter Buttons
+   ========================================================================== */
+
+.support-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.filter-btn {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+/* ==========================================================================
+   Urgent Lines Section
+   ========================================================================== */
+
+.urgent-lines {
+  margin: var(--space-2xl) 0;
+}
+
+/* ==========================================================================
+   Related Support Section
+   ========================================================================== */
+
+.related-support {
+  margin: var(--space-3xl) 0;
+}
+
+.related-support h2 {
+  margin-bottom: var(--space-xl);
+}
+
+/* ==========================================================================
+   Search Panel
+   ========================================================================== */
+
+.support-search-panel {
+  padding: var(--space-lg) 0;
+}
+
+.support-search-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .support-search-card {
+    padding: var(--space-xl);
+  }
+}
+
+.support-search-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.support-search-header h2 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2xs);
+}
+
+@media (min-width: 640px) {
+  .support-search-header h2 {
+    font-size: var(--text-xl);
+  }
+}
+
+.support-search-header .text-muted {
+  font-size: var(--text-sm);
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .support-search-header .text-muted {
+    display: block;
+  }
+}
+
+.support-search-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* ==========================================================================
+   Support Filters
+   ========================================================================== */
+
+.support-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+@media (max-width: 640px) {
+  .support-filters {
+    gap: var(--space-xs);
+  }
+}
+
+/* ==========================================================================
+   Results Section
+   ========================================================================== */
+
+.support-results {
+  padding: var(--space-lg) 0 var(--space-2xl);
+}
+
+.support-results-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.support-results-info {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.support-clear {
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-full);
+  background: var(--card);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.support-clear:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--accent-soft);
+}
+
+.support-no-results {
+  text-align: center;
+  padding: var(--space-2xl);
+  color: var(--muted);
+  font-size: var(--text-base);
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+}
+
+/* ==========================================================================
+   Dedicated Section
+   ========================================================================== */
+
+.support-dedicated {
+  padding: var(--space-xl) 0;
+}
+
+.support-dedicated-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 640px) {
+  .support-dedicated-card {
+    padding: var(--space-xl);
+  }
+}
+
+.support-dedicated-card h2 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-md);
+}
+
+.support-dedicated-card p {
+  line-height: var(--leading-relaxed);
+}
+
+.support-dedicated-list {
+  margin: var(--space-md) 0;
+  padding-left: var(--space-xl);
+  color: var(--muted);
+  display: grid;
+  gap: var(--space-sm);
+  line-height: var(--leading-relaxed);
+}
+
+.support-dedicated-list strong {
+  color: var(--text);
+}
+
+.support-dedicated-note {
+  font-size: var(--text-sm);
+  color: var(--muted-soft);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   FAQ Section
+   ========================================================================== */
+
+.support-faq {
+  padding: var(--space-xl) 0 var(--space-3xl);
+}
+
+.support-faq-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .support-faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.support-faq-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.support-faq-card h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.support-faq-card p {
+  margin-bottom: 0;
+  line-height: var(--leading-relaxed);
+}
+
+.support-faq-card--alert {
+  border: 2px solid var(--urgent);
+  background: linear-gradient(135deg, var(--card) 0%, rgba(var(--urgent-rgb), 0.03) 100%);
+}
+
+.support-faq-card--alert h3 {
+  color: var(--urgent);
+}
+
+.support-faq-card--wide {
+  grid-column: 1 / -1;
+}

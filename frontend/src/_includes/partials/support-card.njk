@@ -1,0 +1,62 @@
+{# Calculate open status for this line #}
+{% set status = line.openingHours | openStatus %}
+
+<article
+  class="support-card"
+  data-category="{{ line.category }}"
+  data-tags="{{ (line.tags or []) | join(' ') }}"
+  data-name="{{ line.name }}"
+  data-description="{{ line.description }}"
+  data-opening-hours='{{ line.openingHours | jsonify | safe }}'
+>
+  <div class="support-card-header">
+    <div class="support-card-icon">
+      {% icon line.icon | default("phone"), "" %}
+    </div>
+    <div class="support-card-title-wrap">
+      <h3>{{ line.name }}</h3>
+      {% if line.available %}
+        <span class="support-availability">{{ line.available }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if line.number %}
+    <div class="support-phone-row">
+      <a href="tel:{{ line.number | telHref }}" class="support-phone" aria-label="Ring {{ line.number }}">
+        {% icon "phone", "support-phone-icon" %}
+        <span>{{ line.number }}</span>
+      </a>
+      {% if status.is24h %}
+        <span class="badge-open badge-24h" aria-label="Öppen dygnet runt">
+          <span class="status-dot status-dot--open" aria-hidden="true"></span>
+          <span class="badge-text">24/7</span>
+        </span>
+      {% elif status.isOpen %}
+        <span class="badge-open" aria-label="Öppen nu">
+          <span class="status-dot status-dot--open" aria-hidden="true"></span>
+          <span class="badge-text">Öppet</span>
+        </span>
+      {% elif line.openingHours and line.openingHours.length > 0 %}
+        <span class="badge-closed" aria-label="Stängt">
+          <span class="status-dot status-dot--closed" aria-hidden="true"></span>
+          <span class="badge-text">Stängt</span>
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% set supportDescription = line.description %}
+  {% if page.url == '/stodlinjer/' %}
+    {% set supportDescription = line.description | truncateWords(20, '...') %}
+  {% endif %}
+  <p class="support-description">{{ supportDescription }}</p>
+
+  {% if line.tags and line.tags.length > 0 %}
+    <div class="support-tags">
+      {% for tag in line.tags %}
+        <span class="support-tag">#{{ tag }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+</article>

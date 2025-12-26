@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Självmordslinjen",
+    "number": "90101",
+    "tel": "90101",
+    "availability": "Dygnet runt",
+    "variant": "urgent",
+    "footerLabel": "Självmordslinjen"
+  },
+  {
+    "name": "SOS Alarm",
+    "number": "112",
+    "tel": "112",
+    "availability": "Akut fara",
+    "variant": "emergency",
+    "footerLabel": "Vid akut fara"
+  },
+  {
+    "name": "Hjälplinjen",
+    "number": "90390",
+    "tel": "90390",
+    "availability": "Dygnet runt",
+    "variant": null,
+    "footerLabel": "Hjälplinjen"
+  }
+]

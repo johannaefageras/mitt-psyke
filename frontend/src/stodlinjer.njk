@@ -1,0 +1,88 @@
+---
+layout: layouts/base.njk
+title: Stödlinjer Sverige – Hitta rätt stöd
+description: En samlad översikt över svenska stödlinjer för psykisk hälsa, våld, missbruk och kris.
+permalink: /stodlinjer/
+bodyClass: support-lines-page
+---
+
+<section class="support-hero">
+  <div class="container">
+    <div class="support-hero-content">
+      <h1>Stödlinjer i Sverige</h1>
+      <p class="support-hero-lede">
+        Här samlar vi Sveriges viktigaste stödlinjer. Alla är anonyma, kostnadsfria och redo att lyssna.
+      </p>
+      
+      <div class="hotline-grid support-hotline-grid">
+        {% include "partials/hotline-cards.njk" %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="support-search-panel" aria-label="Filtrera stödlinjer">
+  <div class="container">
+    <div class="support-search-card">
+      <div class="support-search">
+        {% icon "search", "support-search-icon" %}
+        <input
+          type="search"
+          id="supportSearchInput"
+          class="support-search-input"
+          placeholder="Sök stödlinje..."
+          aria-label="Sök stödlinjer"
+        >
+      </div>
+
+      <div class="support-categories" role="group" aria-label="Kategorier">
+        <button class="category-pill is-active" data-category="all" aria-pressed="true">
+          {% icon "grid-2x2", "pill-icon" %}
+          <span class="pill-label">Alla</span>
+        </button>
+        {% for cat in supportLineCats %}
+        <button class="category-pill" data-category="{{ cat.slug }}" aria-pressed="false">
+          {% icon cat.icon, "pill-icon" %}
+          <span class="pill-label">{{ cat.title }}</span>
+        </button>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="support-results">
+  <div class="container">
+    <div class="support-results-bar">
+      <span id="supportResultsInfo" class="support-results-info" aria-live="polite"></span>
+      <button id="supportClearTag" class="support-clear" type="button" hidden>Rensa</button>
+    </div>
+    <div class="support-grid">
+      {% for line in supportlines | shuffle | supportlinesPhoneFirst %}
+      {% include "partials/support-card.njk" %}
+      {% endfor %}
+    </div>
+    <p id="supportNoResults" class="support-no-results" hidden>
+      Inga stödlinjer matchar din sökning. Testa att ändra sökord eller välj en annan kategori.
+    </p>
+  </div>
+</section>
+
+<section class="support-faq">
+  <div class="container">
+    <div class="support-faq-grid">
+      <article class="support-faq-card">
+        <h3>När ska jag ringa 90101?</h3>
+        <p class="text-muted">
+          Självmordslinjen finns för dig som har tankar på att skada dig själv, eller är orolig för någon annan.
+        </p>
+      </article>
+      <article class="support-faq-card support-faq-card--alert">
+        <h3>När ska jag ringa 112?</h3>
+        <p class="text-muted">
+          Ring 112 vid akuta, livshotande situationer – om någon inte andas, tagit en överdos eller vid omedelbar fara.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>

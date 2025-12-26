@@ -1,0 +1,330 @@
+---
+layout: layouts/base.njk
+title: Min dagbok
+description: Skriv ner reflektioner och följ ditt mående över tid.
+permalink: /dagbok/
+bodyClass: journal-page
+pageStyles:
+  - https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css
+pageScripts:
+  - https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.js
+  - https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/sv.js
+  - /assets/js/api.js
+  - /assets/js/journal.js
+---
+
+<section class="journal-section">
+  <div class="container">
+    <header class="journal-header">
+      <div>
+        <p class="eyebrow">Dagbok</p>
+        <h1>Min dagbok</h1>
+        <p class="subtitle">Skriv ner tankar, följ ditt mående och bygg små rutiner.</p>
+      </div>
+      <div class="journal-actions">
+        <button class="button button--primary" type="button" data-journal-scroll="journal-form">
+          {% icon "pencil" %}
+          Ny anteckning
+        </button>
+        <a class="button button--ghost" href="/accounts/profile/">Min profil</a>
+      </div>
+    </header>
+
+    <div class="journal-grid journal-grid--wide">
+      {# ===== JOURNAL FORM ===== #}
+      <div class="journal-form-wrapper" id="journal-form">
+        <form class="journal-form" data-journal-form>
+          <input type="hidden" name="entry_id" data-journal-entry-id>
+
+          {# Form header #}
+          <div class="journal-form-header">
+            <h2 data-journal-form-title>Ny dagboksanteckning</h2>
+            <p class="text-muted">Allt är valfritt – fyll i det som känns relevant.</p>
+          </div>
+
+          {# Mood picker - prominent #}
+          <div class="journal-form-mood">
+            <label class="journal-form-mood-label">Hur mår du?</label>
+            <div class="mood-selector mood-selector--inline" role="radiogroup" aria-label="Ditt mående">
+              <label class="mood-option"><input type="radio" name="mood" value="1"><span class="mood-emoji">😭</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="2"><span class="mood-emoji">😢</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="3"><span class="mood-emoji">😞</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="4"><span class="mood-emoji">😔</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="5"><span class="mood-emoji">😐</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="6"><span class="mood-emoji">🙂</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="7"><span class="mood-emoji">😊</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="8"><span class="mood-emoji">😄</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="9"><span class="mood-emoji">😁</span></label>
+              <label class="mood-option"><input type="radio" name="mood" value="10"><span class="mood-emoji">🤩</span></label>
+            </div>
+          </div>
+
+          {# Main content - the star of the show #}
+          <div class="journal-form-content">
+            <label for="journal-content" class="visually-hidden">Dagbokstext</label>
+            <textarea
+              id="journal-content"
+              name="content"
+              class="form-textarea form-textarea--large"
+              rows="6"
+              placeholder="Skriv fritt om dagen, tankar, känslor..."
+            ></textarea>
+          </div>
+
+          {# Collapsible tracking section #}
+          <details class="journal-form-section">
+            <summary class="journal-form-section-toggle">
+              {% icon "battery-charging" %}
+              Sömn & energi
+            </summary>
+            <div class="journal-form-section-content">
+              <div class="journal-form-tracking-grid">
+                <div class="form-field">
+                  <label for="journal-sleep-hours">
+                    {% icon "bed" %}
+                    Sömn (timmar)
+                  </label>
+                  <input id="journal-sleep-hours" name="sleep_hours" type="number" class="form-input" min="0" max="24" step="0.5" placeholder="7.5">
+                </div>
+                <div class="form-field">
+                  <label>
+                    {% icon "star-badge" %}
+                    Sömnkvalitet
+                  </label>
+                  <div class="quality-selector">
+                    <label class="quality-option"><input type="radio" name="sleep_quality" value="1"><span class="quality-badge">1</span></label>
+                    <label class="quality-option"><input type="radio" name="sleep_quality" value="2"><span class="quality-badge">2</span></label>
+                    <label class="quality-option"><input type="radio" name="sleep_quality" value="3"><span class="quality-badge">3</span></label>
+                    <label class="quality-option"><input type="radio" name="sleep_quality" value="4"><span class="quality-badge">4</span></label>
+                    <label class="quality-option"><input type="radio" name="sleep_quality" value="5"><span class="quality-badge">5</span></label>
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label for="journal-energy">
+                    {% icon "flash-1" %}
+                    Energi (1-10)
+                  </label>
+                  <input id="journal-energy" name="energy_level" type="number" class="form-input" min="1" max="10" placeholder="5">
+                </div>
+                <div class="form-field">
+                  <label for="journal-anxiety">
+                    {% icon "anxiety" %}
+                    Ångest (1-10)
+                  </label>
+                  <input id="journal-anxiety" name="anxiety_level" type="number" class="form-input" min="1" max="10" placeholder="3">
+                </div>
+              </div>
+            </div>
+          </details>
+
+          {# Collapsible reflections section #}
+          <details class="journal-form-section">
+            <summary class="journal-form-section-toggle">
+              {% icon "heart" %}
+              Reflektioner
+            </summary>
+            <div class="journal-form-section-content">
+              <div class="form-field">
+                <label for="journal-grateful">Tacksam för</label>
+                <textarea id="journal-grateful" name="grateful_for" class="form-textarea form-textarea--small" rows="2" placeholder="Vad gav dig energi idag?"></textarea>
+              </div>
+              <div class="form-field">
+                <label for="journal-forward">Ser fram emot</label>
+                <textarea id="journal-forward" name="looking_forward_to" class="form-textarea form-textarea--small" rows="2" placeholder="Något litet att se fram emot imorgon?"></textarea>
+              </div>
+              <div class="form-field">
+                <label for="journal-affirmation">Påminnelse till mig själv</label>
+                <textarea id="journal-affirmation" name="affirmation" class="form-textarea form-textarea--small" rows="2" placeholder="Vad behöver du höra just nu?"></textarea>
+              </div>
+            </div>
+          </details>
+
+          {# Bottom row: date, tags, pin #}
+          <div class="journal-form-meta">
+            <div class="form-field form-field--inline">
+              <div class="input-with-icon">
+                <span class="icon-swap input-icon" data-journal-date-icon>
+                  <i class="mp mpl mp-calendar-month icon icon--line"></i>
+                  <i class="mp mps mp-calendar-month icon icon--solid"></i>
+                </span>
+                <input id="journal-date" name="date" type="text" class="form-input form-input--compact" placeholder="Välj datum">
+              </div>
+            </div>
+            <div class="form-field form-field--inline form-field--grow">
+              <div class="input-with-icon">
+                <span class="icon-swap input-icon">
+                  <i class="mp mpl mp-tag-1 icon icon--line"></i>
+                  <i class="mp mps mp-tag-1 icon icon--solid"></i>
+                </span>
+                <input id="journal-tags" name="tags" type="text" class="form-input form-input--compact" placeholder="Etiketter (separera med komma)">
+              </div>
+            </div>
+            <label class="checkbox-pill" id="pin-entry">
+              <input type="checkbox" name="is_pinned">
+              {% icon "pin-1" %}
+              <span>Fäst</span>
+            </label>
+          </div>
+
+          {# Existing tags suggestions #}
+          <div class="existing-tags" data-journal-tags-suggestions hidden>
+            <span class="existing-tags-label">Dina etiketter:</span>
+          </div>
+
+          {# Form actions #}
+          <div class="journal-form-actions">
+            <button class="button button--primary" type="submit" data-journal-submit>
+              {% icon "save" %}
+              Spara
+            </button>
+            <button type="button" class="button button--ghost" data-journal-reset>Rensa</button>
+            <button type="button" class="button button--ghost" data-journal-cancel hidden>Avbryt</button>
+            <p class="form-message" data-journal-message></p>
+          </div>
+        </form>
+      </div>
+
+      {# ===== JOURNAL ENTRIES LIST ===== #}
+      <div class="journal-list">
+        <div class="journal-list-header">
+          <h2>Senaste anteckningar</h2>
+          <span class="text-muted" data-journal-count></span>
+        </div>
+
+        <div class="journal-empty" data-journal-empty hidden>
+          <div class="empty-state">
+            <div class="empty-icon">
+              {% icon "notebook" %}
+            </div>
+            <p class="text-muted">Inga inlägg ännu. Skriv ditt första!</p>
+          </div>
+        </div>
+
+        <div class="journal-entries" data-journal-entries></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<template id="journal-entry-template">
+  <article class="surface-card journal-entry-card" data-entry-id>
+    <div class="journal-entry-header">
+      <div>
+        <h3 class="journal-entry-title" data-entry-date></h3>
+        <p class="journal-entry-date" data-entry-created></p>
+      </div>
+      <div class="journal-entry-actions">
+        <span class="status-badge" data-entry-mood hidden></span>
+      </div>
+    </div>
+    <p class="journal-entry-preview" data-entry-preview></p>
+    <div class="journal-entry-tracking" data-entry-tracking></div>
+    <div class="journal-tags" data-entry-tags></div>
+    <div class="journal-entry-footer">
+      <button class="button button--secondary button--small" type="button" data-entry-view>
+        {% icon "view" %}
+        Visa
+      </button>
+      <button class="button button--ghost button--small" type="button" data-entry-edit>
+        {% icon "pencil" %}
+        Redigera
+      </button>
+      <button class="button button--ghost button--small button--danger" type="button" data-entry-delete>
+        {% icon "trash" %}
+        Radera
+      </button>
+    </div>
+  </article>
+</template>
+
+{# Journal Entry View Modal #}
+<div class="journal-modal" data-journal-modal hidden>
+  <div class="journal-modal-backdrop" data-journal-modal-close></div>
+  <div class="journal-modal-content surface-card">
+    <header class="journal-modal-header">
+      <div class="journal-modal-header-info">
+        <span class="journal-modal-mood-display" data-modal-mood-emoji></span>
+        <div>
+          <h2 data-modal-date></h2>
+          <p class="text-muted" data-modal-created></p>
+        </div>
+      </div>
+      <button class="journal-modal-close" type="button" data-journal-modal-close aria-label="Stäng">
+        {% icon "delete" %}
+      </button>
+    </header>
+
+    <div class="journal-modal-body">
+      {# Tracking stats #}
+      <div class="journal-modal-stats" data-modal-stats hidden>
+        <div class="journal-modal-stat" data-modal-stat-sleep hidden>
+          <span class="journal-modal-stat-icon">{% icon "bed" %}</span>
+          <span class="journal-modal-stat-value" data-modal-sleep-value>–</span>
+          <span class="journal-modal-stat-label">Sömn</span>
+        </div>
+        <div class="journal-modal-stat" data-modal-stat-quality hidden>
+          <span class="journal-modal-stat-icon">{% icon "star" %}</span>
+          <span class="journal-modal-stat-value" data-modal-quality-value>–</span>
+          <span class="journal-modal-stat-label">Kvalitet</span>
+        </div>
+        <div class="journal-modal-stat" data-modal-stat-energy hidden>
+          <span class="journal-modal-stat-icon">{% icon "flash-1" %}</span>
+          <span class="journal-modal-stat-value" data-modal-energy-value>–</span>
+          <span class="journal-modal-stat-label">Energi</span>
+        </div>
+        <div class="journal-modal-stat" data-modal-stat-anxiety hidden>
+          <span class="journal-modal-stat-icon">{% icon "cloud-1" %}</span>
+          <span class="journal-modal-stat-value" data-modal-anxiety-value>–</span>
+          <span class="journal-modal-stat-label">Ångest</span>
+        </div>
+      </div>
+
+      {# Reflections #}
+      <div class="journal-modal-reflections" data-modal-reflections hidden>
+        <div class="journal-modal-reflection journal-modal-reflection--grateful" data-modal-grateful hidden>
+          <span class="journal-modal-reflection-icon">{% icon "heart" %}</span>
+          <div class="journal-modal-reflection-content">
+            <p class="journal-modal-reflection-label">Tacksam för</p>
+            <p class="journal-modal-reflection-text" data-modal-grateful-text></p>
+          </div>
+        </div>
+        <div class="journal-modal-reflection journal-modal-reflection--forward" data-modal-forward hidden>
+          <span class="journal-modal-reflection-icon">{% icon "sunset" %}</span>
+          <div class="journal-modal-reflection-content">
+            <p class="journal-modal-reflection-label">Ser fram emot</p>
+            <p class="journal-modal-reflection-text" data-modal-forward-text></p>
+          </div>
+        </div>
+        <div class="journal-modal-reflection journal-modal-reflection--affirmation" data-modal-affirmation hidden>
+          <span class="journal-modal-reflection-icon">{% icon "sparkles" %}</span>
+          <div class="journal-modal-reflection-content">
+            <p class="journal-modal-reflection-label">Påminnelse</p>
+            <p class="journal-modal-reflection-text" data-modal-affirmation-text></p>
+          </div>
+        </div>
+      </div>
+
+      {# Main content #}
+      <div class="journal-modal-text" data-modal-content hidden>
+        <p class="journal-modal-text-label">
+          {% icon "pencil" %}
+          Dagbok
+        </p>
+        <div class="journal-modal-text-content" data-modal-content-text></div>
+      </div>
+
+      {# Tags #}
+      <div class="journal-modal-tags" data-modal-tags></div>
+    </div>
+
+    <footer class="journal-modal-footer">
+      <span class="journal-modal-meta" data-modal-meta></span>
+      <div class="journal-modal-footer-actions">
+        <button class="button button--primary" type="button" data-modal-edit>
+          {% icon "pencil" %}
+          Redigera
+        </button>
+      </div>
+    </footer>
+  </div>
+</div>

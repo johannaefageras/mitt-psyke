@@ -1,0 +1,552 @@
+/* ==========================================================================
+   Contacts Pages
+
+   Contact list, cards, form, filters.
+   Layout matches journal page pattern.
+   ========================================================================== */
+
+/* ==========================================================================
+   Contacts Header
+   ========================================================================== */
+
+.contacts-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.contacts-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ==========================================================================
+   Contacts Grid Layout (matches journal-grid--wide)
+   ========================================================================== */
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Contact Form
+   ========================================================================== */
+
+.contact-form-wrapper {
+  /* Form stays in place on desktop */
+}
+
+.contact-form {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-form-header h2 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-xl);
+}
+
+.contact-form-header p {
+  margin: 0;
+}
+
+.contact-form-row {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.contact-form-row > .form-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+.contact-form-row > .form-field--grow {
+  flex: 2;
+}
+
+.contact-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.contact-form-actions .form-message {
+  margin-left: auto;
+}
+
+/* ==========================================================================
+   Contacts List
+   ========================================================================== */
+
+.contacts-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contacts-list-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.contacts-list-header h2 {
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Contacts Filters
+   ========================================================================== */
+
+.contacts-filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0 var(--space-md) 0;
+}
+
+.contacts-filters .form-field--compact {
+  width: 100%;
+}
+
+.contacts-filters .form-select--compact {
+  padding: var(--space-sm) var(--space-md);
+}
+
+/* Search input with icon */
+.contacts-filters .input-with-icon .form-input {
+  padding: var(--space-sm) var(--space-md);
+  padding-left: 2.4rem;
+}
+
+.contacts-filters .input-with-icon .input-icon {
+  color: var(--muted);
+}
+
+/* Custom chevron for standalone filter selects */
+.contacts-filters .select-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.contacts-filters .select-wrapper select {
+  width: 100%;
+}
+
+/* ==========================================================================
+   Contacts Empty State
+   ========================================================================== */
+
+.contacts-empty {
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+}
+
+.contacts-empty:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.contacts-empty:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Contact Cards (collapsible)
+   ========================================================================== */
+
+.contact-cards {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.contact-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Contact card toggle (summary) */
+.contact-card-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  padding-right: 0.75rem;
+  cursor: pointer;
+  list-style: none;
+  transition: background var(--dur-base) var(--ease-out);
+}
+
+.contact-card-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.contact-card-toggle::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235c5b6a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.contact-card[open] .contact-card-toggle::after {
+  transform: rotate(180deg);
+}
+
+.contact-card-toggle:hover {
+  background: var(--card-strong);
+}
+
+.contact-card-toggle:hover::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232f2e3a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Dark theme */
+:root[data-theme="dark"] .contact-card-toggle::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a9a8b4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .contact-card-toggle:hover::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e4e3ed' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Summary content */
+.contact-card-summary {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.contact-card-name {
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  margin: 0;
+  line-height: var(--leading-snug);
+}
+
+.contact-card-organization {
+  font-size: var(--text-sm);
+  margin: var(--space-2xs) 0 0;
+}
+
+.contact-card-organization:empty {
+  display: none;
+}
+
+/* Contact type badge */
+.contact-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  background: rgba(120, 113, 108, 0.15);
+  color: #57534e;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  flex-shrink: 0;
+}
+
+/* Light theme - contact type colors */
+.contact-type-badge[data-type="healthcare"] {
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+}
+
+.contact-type-badge[data-type="psychiatry"] {
+  background: rgba(99, 102, 241, 0.15);
+  color: #4f46e5;
+}
+
+.contact-type-badge[data-type="psychology"] {
+  background: rgba(139, 92, 246, 0.15);
+  color: #7c3aed;
+}
+
+.contact-type-badge[data-type="counselor"] {
+  background: rgba(168, 85, 247, 0.15);
+  color: #9333ea;
+}
+
+.contact-type-badge[data-type="social_services"] {
+  background: rgba(8, 145, 178, 0.15);
+  color: #0e7490;
+}
+
+.contact-type-badge[data-type="contact_person"] {
+  background: rgba(20, 184, 166, 0.15);
+  color: #0d9488;
+}
+
+.contact-type-badge[data-type="housing_support"] {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+
+.contact-type-badge[data-type="support_person"] {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+}
+
+.contact-type-badge[data-type="family"] {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+.contact-type-badge[data-type="friend"] {
+  background: rgba(236, 72, 153, 0.15);
+  color: #db2777;
+}
+
+.contact-type-badge[data-type="other"] {
+  background: rgba(120, 113, 108, 0.15);
+  color: #57534e;
+}
+
+/* Dark theme - contact type colors */
+:root[data-theme="dark"] .contact-type-badge[data-type="healthcare"] {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="psychiatry"] {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="psychology"] {
+  background: rgba(139, 92, 246, 0.2);
+  color: #a78bfa;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="counselor"] {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="social_services"] {
+  background: rgba(8, 145, 178, 0.2);
+  color: #22d3ee;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="contact_person"] {
+  background: rgba(20, 184, 166, 0.2);
+  color: #2dd4bf;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="housing_support"] {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="support_person"] {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="family"] {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="friend"] {
+  background: rgba(236, 72, 153, 0.2);
+  color: #f472b6;
+}
+
+:root[data-theme="dark"] .contact-type-badge[data-type="other"] {
+  background: rgba(120, 113, 108, 0.2);
+  color: #a8a29e;
+}
+
+/* Expanded content */
+.contact-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: 0 var(--space-lg) var(--space-lg);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-md);
+}
+
+/* Contact info */
+.contact-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--text);
+}
+
+.contact-info-item .icon-swap {
+  color: var(--muted);
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.contact-info-item:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.contact-info-item:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.contact-info-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.contact-info-item a:hover {
+  text-decoration: underline;
+}
+
+.contact-info-item[hidden] {
+  display: none;
+}
+
+/* Notes */
+.contact-card-notes {
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  padding: var(--space-sm);
+  background: var(--card-strong);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--border);
+}
+
+.contact-card-notes:empty,
+.contact-card-notes[hidden] {
+  display: none;
+}
+
+/* Card footer */
+.contact-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.contact-card-actions {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+/* Category badge */
+.contact-category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  background: var(--card-strong);
+  color: var(--muted);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+}
+
+.contact-category-badge:empty,
+.contact-category-badge[hidden] {
+  display: none;
+}
+
+/* Updated timestamp */
+.contact-card-updated {
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+  margin: 0;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .contact-form {
+    padding: var(--space-lg);
+  }
+
+  .contact-form-row {
+    flex-direction: column;
+  }
+
+  .contact-form-row > .form-field {
+    min-width: 100%;
+  }
+
+  .contacts-filters {
+    flex-direction: column;
+  }
+
+  .contacts-filters .form-field--compact,
+  .contacts-filters .select-wrapper {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .contact-card-toggle {
+    padding: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .contact-card-content {
+    padding: 0 var(--space-md) var(--space-md);
+  }
+
+  .contact-card-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-card-actions {
+    justify-content: flex-end;
+  }
+}

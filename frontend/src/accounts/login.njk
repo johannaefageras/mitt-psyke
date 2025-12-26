@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: Logga in
+description: Logga in för att komma åt din profil och din dagbok.
+permalink: /accounts/login/
+bodyClass: auth-page
+pageScripts:
+  - /assets/js/api.js
+  - /assets/js/accounts.js
+---
+
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-shell">
+      <div class="surface-card auth-card">
+        <header class="auth-header">
+          <h1>Logga in</h1>
+          <p class="subtitle">Välkommen tillbaka. Fortsätt i lugn takt.</p>
+        </header>
+
+        <form class="auth-form" data-auth-form="login" novalidate>
+          <div class="form-field">
+            <label for="login-email">E-postadress</label>
+            <input
+              id="login-email"
+              name="email"
+              type="email"
+              class="form-input"
+              placeholder="namn@example.com"
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="login-password">Lösenord</label>
+            <input
+              id="login-password"
+              name="password"
+              type="password"
+              class="form-input"
+              placeholder="********"
+            >
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="button button--primary">Logga in</button>
+            <a class="button button--ghost" href="/accounts/password-reset/">Glömt lösenord?</a>
+          </div>
+          <p class="form-hint" data-auth-message></p>
+        </form>
+
+        <div class="auth-footer">
+          <p class="text-muted">Inget konto än? <a href="/accounts/register/">Skapa ett konto</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

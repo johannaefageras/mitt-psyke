@@ -1,0 +1,10 @@
+{% for hotline in hotlines %}
+<a href="tel:{{ hotline.tel }}" class="hotline-card{% if hotline.variant %} hotline-{{ hotline.variant }}{% endif %}">
+  <span class="hotline-label">{{ hotline.name }}</span>
+  <span class="hotline-number">
+    {% icon "phone", "hotline-number-icon" %}
+    <span class="hotline-number-text">{{ hotline.number }}</span>
+  </span>
+  <span class="hotline-availability">{{ hotline.availability }}</span>
+</a>
+{% endfor %}

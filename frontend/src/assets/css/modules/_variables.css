@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Design Tokens / CSS Custom Properties
+
+   Typography System:
+   - Gooper: Headings & display (warm, friendly oldstyle serif)
+   - F37 Gruffy Soft: Body text, UI & functional elements (rounded sans-serif)
+   ========================================================================== */
+
+:root {
+  /* =========================================================================
+     Colors – Light Theme
+     ========================================================================= */
+
+  --bg: #f6f5fb;
+  --bg-pattern: linear-gradient(
+    180deg,
+    rgba(252, 251, 254, 0.98) 0%,
+    rgba(246, 245, 252, 0.97) 50%,
+    rgba(243, 242, 250, 0.95) 100%
+  );
+
+  /* Surface hierarchy */
+  --card: #ffffff;
+  --card-strong: #e7e5f3;
+  --border: #d4d2e5;
+
+  /* Text colors */
+  --text: #2f2e3a;
+  --muted: #5c5b6a;
+  --muted-soft: #747284;
+
+  /* Brand / Accent */
+  --accent: #8a8ec4;
+  --accent-dark: #6f73b0;
+  --accent-light: #b7b9e0;
+  --accent-rgb: 138, 142, 196;
+  --accent-soft: rgba(var(--accent-rgb), 0.22);
+  --card-border: rgba(var(--accent-rgb), 0.22);
+  --card-border-strong: rgba(var(--accent-rgb), 0.34);
+
+  /* Text on accent backgrounds */
+  --on-accent: #f5f8fb;
+
+  /* Urgent / Danger */
+  --urgent: #cf4576;
+  --urgent-rgb: 215, 70, 123;
+  --urgent-soft: rgba(var(--urgent-rgb), 0.95);
+
+  /* Success */
+  --success: #22c55e;
+  --success-rgb: 34, 197, 94;
+
+  /* =========================================================================
+     Shadows
+     ========================================================================= */
+
+  --shadow-sm: 0 1px 3px rgba(42, 48, 54, 0.06);
+  --shadow: 0 6px 14px rgba(42, 48, 54, 0.08);
+  --shadow-lg: 0 12px 30px rgba(42, 48, 54, 0.1);
+
+  /* =========================================================================
+     Layout
+     ========================================================================= */
+
+  --container-max: 1180px;
+  --header-height: 72px;
+
+  /* =========================================================================
+     Spacing Scale
+     ========================================================================= */
+
+  --space-2xs: 0.125rem; /* 2px */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 1.5rem; /* 24px */
+  --space-xl: 2rem; /* 32px */
+  --space-2xl: 3rem; /* 48px */
+  --space-3xl: 4rem; /* 64px */
+
+  /* =========================================================================
+     Typography
+
+     Gooper: Warm, friendly oldstyle serif. Best at display sizes with
+     tighter tracking. Medium/SemiBold for headings.
+
+     F37 Gruffy Soft: Rounded geometric sans-serif with a warm, friendly
+     personality. Large x-height and open counters make it highly readable.
+     Available weights: 300, 400, 500, 700, 800, 900 with italics.
+     
+     Key characteristics:
+     - Generous x-height reads larger than typical fonts at same size
+     - Soft, rounded terminals create approachable feel
+     - Open counters and letterforms need minimal tracking
+     - Regular (400) provides excellent body text legibility
+     - Medium (500) offers subtle emphasis without heaviness
+     ========================================================================= */
+
+  /* Font stacks */
+  --font-heading: 'Gooper', Georgia, 'Times New Roman', serif;
+  --font-body: 'F37 Gruffy Soft', 'Nunito', 'Quicksand', 'Poppins', sans-serif;
+  --font-mono: 'SF Mono', 'Fira Code', 'Roboto Mono', Consolas, monospace;
+  --font-sans: var(--font-body);
+
+  /* Type scale - optimized for Gruffy's large x-height */
+  --text-xs: 0.75rem; /* 12px - Gruffy reads larger */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 2.5rem; /* 40px */
+
+  /* Line heights - Gruffy's rounded forms need breathing room */
+  --leading-none: 1;
+  --leading-tight: 1.15; /* Gooper headings */
+  --leading-snug: 1.35; /* Subheadings & compact body */
+  --leading-normal: 1.55; /* Gruffy body text - generous air */
+  --leading-relaxed: 1.65; /* Gruffy long-form content */
+  --leading-loose: 1.75; /* Gruffy prose & journals */
+
+  /* Letter spacing - Gruffy is naturally open, minimal tracking */
+  --tracking-tightest: -0.03em; /* Large Gooper headings */
+  --tracking-tighter: -0.02em; /* Medium Gooper headings */
+  --tracking-tight: -0.01em; /* Small Gooper headings */
+  --tracking-normal: 0; /* Gruffy default - naturally well-spaced */
+  --tracking-wide: 0.01em; /* Small text enhancement */
+  --tracking-wider: 0.02em; /* Labels & functional elements */
+  --tracking-widest: 0.05em; /* Uppercase labels */
+
+  /* Font weights - mapped to Gruffy's available weights */
+  --weight-light: 300; /* Soft, delicate text */
+  --weight-regular: 400; /* Standard body text */
+  --weight-medium: 500; /* Subtle emphasis, links, labels */
+  --weight-semibold: 700; /* Strong emphasis, buttons */
+  --weight-bold: 800; /* Extra bold for highlights */
+  --weight-black: 900; /* Maximum impact */
+
+  /* =========================================================================
+     Border Radius
+     ========================================================================= */
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* =========================================================================
+     Motion / Transitions
+     ========================================================================= */
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-base: 160ms;
+  --dur-theme: 220ms;
+
+  color-scheme: light;
+}
+
+/* ==========================================================================
+   Dark Theme
+   ========================================================================== */
+
+:root[data-theme='dark'] {
+  --bg: #1a1a21;
+  --bg-pattern: linear-gradient(
+    180deg,
+    rgba(26, 26, 33, 0.98) 0%,
+    rgba(36, 35, 46, 0.96) 55%,
+    rgba(36, 35, 46, 0.94) 100%
+  );
+
+  --card: #24232e;
+  --card-strong: #2b2a36;
+  --border: #38374a;
+
+  --text: #e4e3ed;
+  --muted: #a9a8b4;
+  --muted-soft: #c1c0cb;
+
+  --accent: #8a8ec4;
+  --accent-dark: #b7b9e0;
+  --accent-light: #484a68;
+  --accent-rgb: 138, 142, 196;
+  --accent-soft: rgba(138, 142, 196, 0.24);
+  --card-border: rgba(var(--accent-rgb), 0.2);
+  --card-border-strong: rgba(var(--accent-rgb), 0.32);
+
+  --on-accent: #181b1e;
+
+  --urgent: #c53f57;
+  --urgent-rgb: 197, 63, 87;
+  --urgent-soft: rgba(var(--urgent-rgb), 0.16);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.26);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.32);
+
+  color-scheme: dark;
+}

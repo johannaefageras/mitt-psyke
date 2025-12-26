@@ -1,0 +1,119 @@
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-Light.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Light.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-LightItalic.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-LightItalic.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-Regular.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Regular.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-RegularItalic.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-RegularItalic.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-Medium.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Medium.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-MediumItalic.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-MediumItalic.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-Bold.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Bold.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-BoldItalic.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-BoldItalic.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-ExtraBold.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-ExtraBold.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-ExtraBoldItalic.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-ExtraBoldItalic.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-Black.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Black.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'F37 Gruffy Soft';
+  src: url('../../fonts/f37-gruffy-soft/F37GruffySoft-BlackItalic.woff2') format('woff2'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-BlackItalic.woff') format('woff'),
+    url('../../fonts/f37-gruffy-soft/F37GruffySoft-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}

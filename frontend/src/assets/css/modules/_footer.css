@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Footer
+   
+   Site footer with links, emergency info, and copyright.
+   ========================================================================== */
+
+.site-footer {
+  background: var(--card-strong);
+  border-top: 1px solid var(--border);
+  padding: var(--space-2xl) 0 var(--space-lg);
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Footer Grid
+   ========================================================================== */
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+/* ==========================================================================
+   Footer Blocks
+   ========================================================================== */
+
+.footer-block h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-md);
+}
+
+.footer-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.footer-heading-icon {
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.footer-heading:hover .footer-heading-icon .icon--line,
+.footer-heading:focus-visible .footer-heading-icon .icon--line {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.footer-heading:hover .footer-heading-icon .icon--solid,
+.footer-heading:focus-visible .footer-heading-icon .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.footer-block p {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+/* ==========================================================================
+   Footer Links
+   ========================================================================== */
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-bottom: var(--space-sm);
+}
+
+.footer-links a {
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Emergency Links
+   ========================================================================== */
+
+.footer-emergency a {
+  color: var(--text);
+  font-weight: var(--weight-regular);
+}
+
+.footer-emergency strong {
+  color: var(--urgent);
+}
+
+/* ==========================================================================
+   Footer Bottom
+   ========================================================================== */
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--border);
+}
+
+.copyright {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-light);
+  color: var(--muted);
+  margin-bottom: var(--space-xs);
+}
+
+.disclaimer {
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+  margin: 0;
+}

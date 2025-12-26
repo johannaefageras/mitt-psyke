@@ -1,0 +1,1164 @@
+/* ==========================================================================
+   Journal Pages
+
+   Journal list, entries, form, mood selector, tracking, modal.
+   ========================================================================== */
+
+/* ==========================================================================
+   Journal Header
+   ========================================================================== */
+
+.journal-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.journal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ==========================================================================
+   Journal List
+   ========================================================================== */
+
+.journal-list {
+  display: grid;
+  gap: var(--space-md);
+  align-content: start;
+}
+
+.journal-list-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--space-sm);
+}
+
+.journal-list-header h2 {
+  font-size: var(--text-lg);
+  margin: 0;
+}
+
+.journal-entries {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.journal-empty {
+  padding: var(--space-2xl) var(--space-lg);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Journal Entry Card
+   ========================================================================== */
+
+.journal-entry-card,
+.entry-card {
+  padding: var(--space-lg);
+  display: grid;
+  gap: var(--space-md);
+  transition: border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.journal-entry-card:hover,
+.entry-card:hover {
+  border-color: rgba(var(--accent-rgb), 0.3);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.journal-entry-card[data-pinned='true'],
+.entry-pinned {
+  border-left: 3px solid var(--accent);
+}
+
+/* Entry header */
+.journal-entry-header,
+.entry-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.entry-header {
+  margin-bottom: 0.75rem;
+}
+
+.journal-entry-title {
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  margin: 0 0 var(--space-2xs);
+}
+
+.journal-entry-date,
+.entry-date {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+}
+
+.entry-date {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+}
+
+.entry-date a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.entry-date a:hover {
+  color: var(--accent);
+}
+
+.entry-date-mood {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.entry-mood {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* Entry actions */
+.journal-entry-actions,
+.entry-actions-mini {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.entry-actions-mini {
+  gap: var(--space-sm);
+}
+
+.journal-entry-actions .status-badge {
+  font-size: var(--text-sm);
+}
+
+/* Entry preview */
+.journal-entry-preview,
+.entry-preview {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.entry-preview {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.entry-preview em {
+  color: var(--text);
+  font-style: normal;
+  font-weight: var(--weight-medium); /* Gruffy 500 for highlighted terms */
+}
+
+.entry-empty {
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* Entry tracking */
+.journal-entry-tracking,
+.entry-tracking-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border);
+}
+
+.journal-entry-tracking {
+  padding-top: var(--space-md);
+}
+
+.journal-entry-tracking:empty {
+  display: none;
+}
+
+.entry-tracking-summary {
+  gap: var(--space-md);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.journal-tracking-item,
+.tracking-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  background: var(--card-strong);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  color: var(--muted);
+}
+
+.tracking-item {
+  padding: 0;
+  background: none;
+  gap: var(--space-xs);
+}
+
+.tracking-item i {
+  font-size: 0.9rem;
+}
+
+/* Entry footer */
+.journal-entry-footer,
+.entry-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.entry-footer {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* ==========================================================================
+   Entry List (Django templates)
+   ========================================================================== */
+
+.entry-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ==========================================================================
+   Mood Selector
+   ========================================================================== */
+
+.mood-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.mood-option {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.mood-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mood-emoji {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  color: var(--text);
+  transition: transform var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out);
+}
+
+.mood-emoji svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  display: block;
+  stroke: currentColor;
+  fill: none;
+}
+
+.mood-option input:checked + .mood-emoji {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 2px rgba(var(--accent-rgb), 0.3);
+  transform: scale(1.05);
+}
+
+/* Minimal mood selector (inline) */
+.mood-selector-minimal,
+.mood-selector--inline {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-sm);
+}
+
+.mood-selector--inline {
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.mood-option-minimal {
+  cursor: pointer;
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.mood-option-minimal input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mood-option-minimal .mood-emoji,
+.mood-selector--inline .mood-emoji {
+  font-size: 2rem;
+  line-height: 1;
+  padding: var(--space-sm);
+  border-radius: 12px;
+  background: transparent;
+  border: none;
+  transition: transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+  opacity: 0.5;
+  filter: grayscale(50%);
+}
+
+.mood-selector--inline .mood-emoji {
+  font-size: 1.75rem;
+  padding: var(--space-xs);
+}
+
+.mood-option-minimal:hover .mood-emoji,
+.mood-selector--inline .mood-option:hover .mood-emoji {
+  opacity: 0.8;
+  filter: grayscale(20%);
+  transform: scale(1.1);
+}
+
+.mood-option-minimal input:checked + .mood-emoji,
+.mood-selector--inline .mood-option input:checked + .mood-emoji {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.15);
+  background: transparent;
+  box-shadow: none;
+}
+
+.mood-selector--inline .mood-option input:checked + .mood-emoji {
+  transform: scale(1.2);
+}
+
+@media (max-width: 820px) {
+  .mood-selector--inline {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .mood-selector-minimal {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .mood-option-minimal .mood-emoji,
+  .mood-selector--inline .mood-emoji {
+    font-size: 1.6rem;
+    padding: 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   Quality Selector
+   ========================================================================== */
+
+.quality-selector,
+.quality-selector-wrapper {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.quality-option {
+  cursor: pointer;
+  position: relative;
+}
+
+.quality-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.quality-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  font-family: var(--font-body);
+  transition: border-color var(--dur-base) var(--ease-out),
+    background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+}
+
+.quality-option input:checked + .quality-badge {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.quality-option:hover .quality-badge {
+  border-color: var(--accent);
+}
+
+/* ==========================================================================
+   Journal Tracking Header (entry detail)
+   ========================================================================== */
+
+.tracking-header {
+  display: flex;
+  align-items: stretch;
+  padding: 1.25rem 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.tracking-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-xs);
+}
+
+.tracking-column:not(:last-child) {
+  border-right: 1px solid var(--card-border);
+}
+
+.tracking-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--muted);
+}
+
+.tracking-value {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--text);
+}
+
+.mood-emoji-display {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.tracking-empty {
+  color: var(--muted);
+  opacity: 0.6;
+}
+
+.tracking-pinned {
+  display: flex;
+  align-items: center;
+  padding-left: var(--space-md);
+  color: var(--accent);
+  font-size: var(--text-base);
+}
+
+@media (max-width: 600px) {
+  .tracking-header {
+    flex-wrap: wrap;
+    padding: var(--space-md);
+    position: relative;
+  }
+
+  .tracking-column {
+    flex: 1 1 45%;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .tracking-column:not(:last-child) {
+    border-right: none;
+  }
+
+  .tracking-column:nth-child(1),
+  .tracking-column:nth-child(2) {
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .tracking-pinned {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    padding-left: 0;
+  }
+
+  .mood-emoji-display {
+    font-size: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   Journal Entry Body (detail view)
+   ========================================================================== */
+
+.entry-body {
+  padding: 2rem 2.5rem;
+}
+
+@media (max-width: 600px) {
+  .entry-body {
+    padding: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   Reflections Section
+   ========================================================================== */
+
+.reflections-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.reflection-block {
+  display: flex;
+  gap: var(--space-md);
+  padding: 1.25rem 1.5rem;
+  margin: 0;
+  background: var(--card-strong);
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--accent);
+}
+
+.reflection-grateful {
+  border-left-color: var(--urgent);
+}
+
+.reflection-forward {
+  border-left-color: var(--accent-light);
+}
+
+.reflection-affirmation {
+  border-left-color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .reflection-block {
+    padding: 1rem 1.25rem;
+  }
+}
+
+.reflection-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.reflection-text cite {
+  display: block;
+  font-style: normal;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium); /* Gruffy 500 for labels */
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  color: var(--muted);
+  margin-bottom: var(--space-xs);
+}
+
+.reflection-text p {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.reflection-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Journal Text (main content)
+   ========================================================================== */
+
+.journal-text {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: var(--text);
+}
+
+.journal-text.has-reflections {
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--card-border);
+}
+
+.journal-text p {
+  margin-bottom: var(--space-md);
+}
+
+.journal-text p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .journal-text {
+    font-size: 1.05rem;
+  }
+}
+
+/* ==========================================================================
+   Empty Entry Note
+   ========================================================================== */
+
+.empty-entry-note {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--muted);
+}
+
+.empty-entry-note i {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+  display: block;
+  opacity: 0.6;
+}
+
+.empty-entry-note p {
+  margin: 0;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Entry Navigation
+   ========================================================================== */
+
+.entry-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--card-border);
+}
+
+@media (max-width: 600px) {
+  .entry-nav {
+    flex-direction: column;
+  }
+
+  .entry-nav .btn,
+  .entry-nav .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   Entry Meta
+   ========================================================================== */
+
+.entry-meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Journal Modal
+   ========================================================================== */
+
+.journal-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: var(--space-lg);
+}
+
+.journal-modal[hidden] {
+  display: none;
+}
+
+.journal-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.journal-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  max-height: calc(100vh - var(--space-3xl));
+  overflow-y: auto;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Modal header */
+.journal-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--card);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  z-index: 1;
+}
+
+.journal-modal-header-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  min-width: 0;
+}
+
+.journal-modal-header h2 {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.journal-modal-header p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.journal-modal-mood-display {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.journal-modal-close {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.journal-modal-close:hover {
+  background: var(--urgent-soft);
+  border-color: var(--urgent);
+  color: var(--urgent);
+}
+
+.journal-modal-close:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.journal-modal-close:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Modal body */
+.journal-modal-body {
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Tracking stats row */
+.journal-modal-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--card-strong);
+  border-radius: var(--radius-lg);
+}
+
+.journal-modal-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2xs);
+  padding: var(--space-sm);
+}
+
+.journal-modal-stat-icon {
+  color: var(--accent);
+  font-size: 1.4rem;
+}
+
+.journal-modal-stat:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.journal-modal-stat:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.journal-modal-stat-value {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium); /* Gruffy 500 for stat values */
+  font-family: var(--font-body);
+  color: var(--text);
+}
+
+.journal-modal-stat-label {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Reflections */
+.journal-modal-reflections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.journal-modal-reflection {
+  display: flex;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--card-strong);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--accent);
+}
+
+.journal-modal-reflection--grateful {
+  border-left-color: #f59e0b;
+}
+
+.journal-modal-reflection--forward {
+  border-left-color: #3b82f6;
+}
+
+.journal-modal-reflection--affirmation {
+  border-left-color: #8b5cf6;
+}
+
+.journal-modal-reflection-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-sm);
+  background: rgba(var(--accent-rgb), 0.15);
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.journal-modal-reflection:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.journal-modal-reflection:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.journal-modal-reflection--grateful .journal-modal-reflection-icon {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.journal-modal-reflection--forward .journal-modal-reflection-icon {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.journal-modal-reflection--affirmation .journal-modal-reflection-icon {
+  background: rgba(139, 92, 246, 0.15);
+  color: #8b5cf6;
+}
+
+.journal-modal-reflection-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.journal-modal-reflection-label {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+  margin-bottom: var(--space-2xs);
+}
+
+.journal-modal-reflection-text {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text);
+  margin: 0;
+}
+
+/* Main content */
+.journal-modal-text {
+  padding: var(--space-lg);
+  background: var(--bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.journal-modal-text-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--muted);
+  margin-bottom: var(--space-md);
+}
+
+.journal-modal-text-label .icon-swap {
+  color: var(--accent);
+  font-size: 1.2em;
+}
+
+.journal-modal-text:hover .journal-modal-text-label .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.journal-modal-text:hover .journal-modal-text-label .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.journal-modal-text-content {
+  font-size: var(--text-base);
+  line-height: var(--leading-loose);
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.journal-modal-text-content p {
+  margin: 0 0 var(--space-md);
+}
+
+.journal-modal-text-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Tags in modal */
+.journal-modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* Modal footer */
+.journal-modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--border);
+  position: sticky;
+  bottom: 0;
+  background: var(--card);
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+}
+
+.journal-modal-footer-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.journal-modal-meta {
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+}
+
+@media (max-width: 600px) {
+  .journal-modal {
+    padding: var(--space-sm);
+  }
+
+  .journal-modal-content {
+    max-height: calc(100vh - var(--space-lg));
+  }
+
+  .journal-modal-header {
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .journal-modal-header h2 {
+    font-size: var(--text-lg);
+  }
+
+  .journal-modal-body {
+    padding: var(--space-lg);
+  }
+
+  .journal-modal-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .journal-modal-footer {
+    flex-direction: column;
+    align-items: stretch;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .journal-modal-footer-actions {
+    width: 100%;
+  }
+
+  .journal-modal-footer-actions .button {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .journal-modal-meta {
+    text-align: center;
+  }
+}
+
+/* ==========================================================================
+   Pagination
+   ========================================================================== */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.pagination-info {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Journal Filters (Django)
+   ========================================================================== */
+
+.journal-filters {
+  padding: 1.25rem;
+}
+
+/* ==========================================================================
+   Journal Container
+   ========================================================================== */
+
+.journal-container,
+.entry-detail-container,
+.tags-container {
+  display: flex;
+  flex-direction: column;
+  width: min(100% - calc(var(--space-lg) * 2), var(--container-max));
+  margin-inline: auto;
+}
+
+.journal-container,
+.tags-container {
+  gap: var(--space-lg);
+}
+
+.entry-detail-container {
+  gap: 1.25rem;
+}
+
+.journal-container .page-title,
+.entry-detail-container .page-title,
+.tags-container .page-title {
+  max-width: none;
+  padding-inline: 0;
+}
+
+.entry-detail-actions,
+.tag-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ==========================================================================
+   Tags Page
+   ========================================================================== */
+
+.tag-list {
+  padding: var(--space-lg);
+}
+
+.tag-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tag-table th,
+.tag-table td {
+  padding: var(--space-md);
+  text-align: left;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.tag-table th {
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--muted);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-widest);
+}
+
+.tag-table tr:last-child td {
+  border-bottom: none;
+}

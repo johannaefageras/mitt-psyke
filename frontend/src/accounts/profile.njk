@@ -1,0 +1,118 @@
+---
+layout: layouts/base.njk
+title: Min profil
+description: Översikt av din profil och snabbvägar till dagboken.
+permalink: /accounts/profile/
+bodyClass: profile-page
+pageScripts:
+  - /assets/js/api.js
+  - /assets/js/accounts.js
+---
+
+<section class="profile-section" data-profile-view>
+  <div class="container">
+    <header class="profile-header">
+      <div class="profile-header-identity">
+        <div class="profile-avatar" data-profile-avatar aria-hidden="true">A</div>
+        <div>
+          <div class="profile-name-row">
+            <h1 data-profile-name>–</h1>
+            <span class="status-badge status-badge--warning" data-profile-status>Ej verifierad</span>
+          </div>
+          <p class="profile-username" data-profile-username>@–</p>
+        </div>
+      </div>
+      <div class="profile-header-actions">
+        <a class="button button--secondary button--sm" href="/accounts/profile/edit/">
+          {% icon "pencil" %}
+          Redigera
+        </a>
+      </div>
+    </header>
+    <div class="profile-grid">
+      <div class="profile-main">
+        <div class="surface-card profile-details-card">
+          <h2>Kontoinformation</h2>
+
+          <dl class="profile-details">
+            <div class="profile-detail-item">
+              <dt>
+                {% icon "envelope" %}
+                E-post
+              </dt>
+              <dd data-profile-email>–</dd>
+            </div>
+            <div class="profile-detail-item">
+              <dt>
+                {% icon "location-pin" %}
+                Kommun/region
+              </dt>
+              <dd data-profile-municipality>–</dd>
+            </div>
+            <div class="profile-detail-item">
+              <dt>
+                {% icon "calendar-month" %}
+                Medlem sedan
+              </dt>
+              <dd data-profile-date>–</dd>
+            </div>
+          </dl>
+
+          <div class="profile-verification" data-profile-resend-wrapper>
+            <p class="form-hint" data-profile-message></p>
+            <a class="inline-link" href="#" data-profile-resend hidden>
+              {% icon "envelope-check" %}
+              Skicka verifieringsmail igen
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-actions-card">
+          <button class="button button--ghost button--danger" type="button" data-auth-logout>
+            {% icon "logout-2" %}
+            Logga ut
+          </button>
+        </div>
+      </div>
+
+      <aside class="profile-sidebar">
+        <a class="surface-card feature-card feature-card--primary" href="/dagbok/">
+          <div class="feature-card-icon">
+            {% icon "feather" %}
+          </div>
+          <div class="feature-card-content">
+            <h3>Min dagbok</h3>
+            <p>Skriv och reflektera över ditt mående.</p>
+          </div>
+          <span class="feature-card-arrow">
+            {% icon "chevron-right" %}
+          </span>
+        </a>
+
+        <a class="surface-card feature-card feature-card--primary" href="/kontakter/">
+          <div class="feature-card-icon">
+            {% icon "contacts" %}
+          </div>
+          <div class="feature-card-content">
+            <h3>Mina kontakter</h3>
+            <p>Samla vårdkontakter och stödpersoner.</p>
+          </div>
+          <span class="feature-card-arrow">
+            {% icon "chevron-right" %}
+          </span>
+        </a>
+
+        <div class="surface-card feature-card feature-card--disabled">
+          <div class="feature-card-icon">
+            {% icon "cog" %}
+          </div>
+          <div class="feature-card-content">
+            <h3>Inställningar</h3>
+            <p>Anpassa notiser och integritet.</p>
+          </div>
+          <span class="feature-card-badge">Kommer snart</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

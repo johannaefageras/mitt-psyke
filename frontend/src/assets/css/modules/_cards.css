@@ -1,0 +1,716 @@
+/* ==========================================================================
+   Cards
+
+   Portal cards, support cards, hotline cards, feature cards, surface cards.
+   ========================================================================== */
+
+/* ==========================================================================
+   Base Surface Card
+   ========================================================================== */
+
+.surface-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Portal Cards (Homepage)
+   ========================================================================== */
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+  .portal-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+}
+
+.portal-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-xl);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease,
+    background 0.15s ease;
+}
+
+/* Decorative circle */
+.portal-card::before {
+  content: '';
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 170px;
+  height: 170px;
+  border-radius: 9999px;
+  background: var(--accent-soft);
+  border: 1px solid rgba(var(--accent-rgb), 0.14);
+  z-index: -1;
+}
+
+/* Inner glow */
+.portal-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.06);
+  pointer-events: none;
+}
+
+.portal-card:hover {
+  border-color: var(--card-border-strong);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+}
+
+.portal-card:focus-visible {
+  outline: 3px solid rgba(var(--accent-rgb), 0.35);
+  outline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  .portal-card {
+    padding: var(--space-lg);
+  }
+}
+
+/* Portal card icon */
+.portal-card-icon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  border-radius: 18px;
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-md);
+  transform: rotate(-2deg);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  color: var(--accent-dark);
+}
+
+.portal-card:hover .portal-card-icon {
+  transform: rotate(0deg) scale(1.03);
+  background: var(--accent-soft);
+  border-color: var(--card-border-strong);
+}
+
+.portal-card h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.portal-card p {
+  color: var(--muted);
+  margin-bottom: var(--space-md);
+}
+
+.portal-card-description {
+  color: var(--muted);
+}
+
+.portal-card-link {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  font-size: var(--text-sm);
+  color: var(--accent);
+  padding-top: var(--space-sm);
+  border-top: 1px solid rgba(var(--accent-rgb), 0.18);
+}
+
+.portal-card-link-icon {
+  font-size: 1.1em;
+}
+
+/* ==========================================================================
+   Support Cards
+   ========================================================================== */
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-md);
+}
+
+@media (max-width: 640px) {
+  .support-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 400px) {
+  .support-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.support-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  padding-inline-start: calc(var(--space-lg) - 3px);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--accent-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.support-card:hover {
+  border-color: var(--card-border-strong);
+  border-left-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .support-card {
+    padding: var(--space-md);
+    padding-inline-start: calc(var(--space-md) - 3px);
+  }
+}
+
+/* Support card header */
+.support-card-header {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.support-card-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+.support-card-icon .icon--line,
+.support-card-icon .icon--solid {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.support-card:hover .support-card-icon .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.support-card:hover .support-card-icon .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Support card title */
+.support-card-title-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.support-card-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.support-card-title-wrap h3 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-regular); /* Gruffy 400 for card titles */
+  margin: 0;
+  line-height: var(--leading-snug);
+}
+
+.support-availability {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+  margin-top: var(--space-2xs);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Support card phone row */
+.support-phone-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--card-strong);
+  border-radius: var(--radius-md);
+}
+
+.support-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: 'Pitch', var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 700; /* Pitch Bold */
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em; /* Pitch benefits from tighter tracking */
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.support-phone:hover {
+  color: var(--accent-dark);
+}
+
+.support-phone .support-phone-icon {
+  font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+  .support-phone-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .support-phone {
+    flex-wrap: wrap;
+    font-size: var(--text-lg);
+  }
+}
+
+/* Support card description */
+.support-description {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin: 0;
+  flex: 1;
+}
+
+/* Support card footer */
+.support-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+}
+
+.support-link {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+}
+
+/* Support card badges */
+.support-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  align-items: center;
+}
+
+/* Support card urgent variant */
+.support-card--urgent {
+  border-left: 5px solid var(--card-border-strong);
+}
+
+.badge-urgent {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--urgent);
+  color: white;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-full);
+}
+
+/* Support card tags */
+.support-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: auto;
+}
+
+.support-tag {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-sm);
+  background: var(--card-strong);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--muted);
+  letter-spacing: var(--tracking-wide); /* Slight tracking for small text */
+}
+
+/* Support availability */
+.support-availability-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.support-next-change {
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Hotline Cards
+   ========================================================================== */
+
+.hotline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+@media (max-width: 640px) {
+  .hotline-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--space-sm);
+  }
+}
+
+.hotline-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-lg);
+  padding-inline-start: calc(var(--space-lg) - 3px);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-left-width: 4px;
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  text-align: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.hotline-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .hotline-card {
+    padding: var(--space-md);
+    padding-inline-start: calc(var(--space-md) - 3px);
+  }
+
+  .hotline-number {
+    font-size: var(--text-xl);
+  }
+}
+
+.hotline-card.hotline-urgent,
+.hotline-card.hotline-emergency {
+  border-left-color: var(--card-border-strong);
+}
+
+.hotline-card.hotline-urgent:hover,
+.hotline-card.hotline-urgent:focus-visible,
+.hotline-card.hotline-emergency:hover,
+.hotline-card.hotline-emergency:focus-visible {
+  border-left-color: var(--accent);
+}
+
+.hotline-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm); /* Slightly smaller label */
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--muted);
+}
+
+/* Hotline number uses Pitch for clear, technical display */
+.hotline-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  font-family: 'Pitch', var(--font-mono);
+  font-size: var(--text-2xl);
+  font-weight: 700; /* Pitch Bold */
+  color: var(--text);
+  letter-spacing: -0.01em; /* Pitch benefits from tighter tracking */
+}
+
+.hotline-number-text {
+  font-variant-numeric: tabular-nums;
+}
+
+.hotline-number-icon {
+  font-size: 0.95em;
+}
+
+.hotline-availability {
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Hotline card status */
+.hotline-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--text-xs);
+  margin-top: var(--space-2xs);
+}
+
+.hotline-status .status-dot {
+  width: 6px;
+  height: 6px;
+}
+
+/* ==========================================================================
+   Feature Cards (Profile page)
+   ========================================================================== */
+
+.feature-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+
+.feature-card--primary:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.feature-card--disabled {
+  opacity: 0.7;
+}
+
+.feature-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  font-size: 1.25rem;
+}
+
+.feature-card--disabled .feature-card-icon {
+  background: var(--card-strong);
+  color: var(--muted);
+}
+
+.feature-card-content h3 {
+  margin: 0 0 var(--space-2xs);
+  font-size: var(--text-base);
+}
+
+.feature-card-content p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.feature-card-arrow {
+  color: var(--accent);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+.feature-card--primary:hover .feature-card-arrow {
+  transform: translateX(4px);
+}
+
+.feature-card-badge {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--muted);
+  background: var(--card-strong);
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 720px) {
+  .feature-card {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .feature-card-arrow,
+  .feature-card-badge {
+    justify-self: start;
+  }
+
+  .feature-card-arrow {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Quick Link Cards
+   ========================================================================== */
+
+.quick-link-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.quick-link-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--card-strong);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+
+.quick-link-icon .icon {
+  width: 1.4em;
+  height: 1.4em;
+}
+
+.quick-link-content h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.quick-link-card > .button {
+  justify-self: end;
+}
+
+@media (max-width: 720px) {
+  .quick-link-card {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .quick-link-card > .button {
+    justify-self: start;
+  }
+}
+
+/* ==========================================================================
+   Portal Aside Card
+   ========================================================================== */
+
+.portal-aside-card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-lg);
+}
+
+.portal-aside-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular); /* Gooper 400 for section titles */
+  letter-spacing: var(--tracking-tight);
+  margin: 0 0 var(--space-md);
+}
+
+.portal-aside-links {
+  list-style: none;
+  padding: 0.5em 0 0 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.portal-aside-links a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--text);
+}
+
+.portal-aside-links .icon-swap {
+  margin-right: 0;
+}
+
+.portal-aside-links a:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Auth & Form Cards
+   ========================================================================== */
+
+.auth-card,
+.profile-card,
+.journal-form-card,
+.form-card {
+  padding: var(--space-xl);
+}
+
+.profile-card {
+  border-left: 4px solid var(--accent);
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.profile-edit-card {
+  padding: var(--space-xl);
+}
+
+.profile-details-card {
+  padding: var(--space-lg);
+}
+
+.profile-details-card h2 {
+  font-size: var(--text-lg);
+  margin: 0 0 var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 600px) {
+  .auth-card,
+  .form-card,
+  .profile-card {
+    padding: var(--space-lg);
+  }
+}

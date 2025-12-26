@@ -1,0 +1,229 @@
+---
+layout: layouts/base.njk
+title: Mina kontakter
+description: Håll koll på viktiga kontakter inom vård, socialtjänst och stöd.
+permalink: /kontakter/
+bodyClass: contacts-page
+pageScripts:
+  - /assets/js/api.js
+  - /assets/js/contacts.js
+---
+
+<section class="contacts-section">
+  <div class="container">
+    <header class="contacts-header">
+      <div>
+        <p class="eyebrow">Kontakter</p>
+        <h1>Mina kontakter</h1>
+        <p class="subtitle">Samla viktiga kontakter för vård, stöd och socialtjänst.</p>
+      </div>
+      <div class="contacts-actions">
+        <button class="button button--primary" type="button" data-contacts-scroll="contact-form">
+          {% icon "add" %}
+          Ny kontakt
+        </button>
+        <a class="button button--ghost" href="/accounts/profile/">Min profil</a>
+      </div>
+    </header>
+
+    <div class="contacts-grid">
+      {# ===== CONTACT FORM ===== #}
+      <div class="contact-form-wrapper" id="contact-form">
+        <form class="contact-form surface-card" data-contact-form>
+          <input type="hidden" name="contact_id" data-contact-id>
+
+          {# Form header #}
+          <div class="contact-form-header">
+            <h2 data-contact-form-title>Ny kontakt</h2>
+            <p class="text-muted">Lägg till en kontakt du vill ha snabb tillgång till.</p>
+          </div>
+
+          {# Name and type row #}
+          <div class="contact-form-row">
+            <div class="form-field form-field--grow">
+              <label for="contact-name">
+                {% icon "user" %}
+                Namn <span class="required">*</span>
+              </label>
+              <input id="contact-name" name="name" type="text" class="form-input" placeholder="T.ex. Johanna Fagerås" required>
+            </div>
+            <div class="form-field">
+              <label for="contact-type">
+                {% icon "id-card" %}
+                Kontakttyp
+              </label>
+              <select id="contact-type" name="contact_type" class="form-select" data-contact-type-select>
+                <option value="other">Välj typ...</option>
+              </select>
+            </div>
+          </div>
+
+          {# Contact info row #}
+          <div class="contact-form-row">
+            <div class="form-field form-field--grow">
+              <label for="contact-phone">
+                {% icon "phone" %}
+                Telefonnummer
+              </label>
+              <input id="contact-phone" name="phone" type="tel" class="form-input" placeholder="070-123 45 67">
+            </div>
+            <div class="form-field form-field--grow">
+              <label for="contact-email">
+                {% icon "envelope" %}
+                E-postadress
+              </label>
+              <input id="contact-email" name="email" type="email" class="form-input" placeholder="namn@epost.se">
+            </div>
+          </div>
+
+          {# Organization and address #}
+          <div class="contact-form-row">
+            <div class="form-field form-field--grow">
+              <label for="contact-organization">
+                {% icon "government-building" %}
+                Organisation
+              </label>
+              <input id="contact-organization" name="organization" type="text" class="form-input" placeholder="T.ex. Kvillebäckens Vårdcentral">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="contact-address">
+              {% icon "location-pin" %}
+              Besöksadress
+            </label>
+            <textarea id="contact-address" name="address" class="form-textarea form-textarea--small" rows="2" placeholder="Gatuadress, postnummer, ort"></textarea>
+          </div>
+
+          {# Notes #}
+          <div class="form-field">
+            <label for="contact-notes">
+              {% icon "notebook" %}
+              Anteckningar
+            </label>
+            <textarea id="contact-notes" name="notes" class="form-textarea" rows="3" placeholder="Extra information, öppettider, hur du bokar tid..."></textarea>
+          </div>
+
+          {# Category #}
+          <div class="form-field">
+            <label for="contact-category">
+              {% icon "tag-1" %}
+              Kategori
+            </label>
+            <div class="input-with-icon">
+              <input id="contact-category" name="category" type="text" class="form-input" placeholder="T.ex. Sjukvård, Socialtjänst, Personligt">
+            </div>
+          </div>
+
+          {# Category suggestions #}
+          <div class="existing-tags" data-contact-category-suggestions hidden>
+            <span class="existing-tags-label">Dina kategorier:</span>
+          </div>
+
+          {# Form actions #}
+          <div class="contact-form-actions">
+            <button class="button button--primary" type="submit" data-contact-submit>
+              {% icon "save" %}
+              Spara
+            </button>
+            <button type="button" class="button button--ghost" data-contact-reset>Rensa</button>
+            <button type="button" class="button button--ghost" data-contact-cancel hidden>Avbryt</button>
+            <p class="form-message" data-contact-message></p>
+          </div>
+        </form>
+      </div>
+
+      {# ===== CONTACTS LIST ===== #}
+      <div class="contacts-list">
+        <div class="contacts-list-header">
+          <h2>Senaste kontakter</h2>
+          <span class="text-muted" data-contacts-count></span>
+        </div>
+
+        {# Filters #}
+        <div class="contacts-filters" data-contacts-filters>
+          <div class="form-field form-field--compact">
+            <div class="input-with-icon">
+              <span class="icon-swap input-icon">
+                <i class="mp mpl mp-search icon icon--line"></i>
+                <i class="mp mps mp-search icon icon--solid"></i>
+              </span>
+              <input type="search" class="form-input form-input--compact" placeholder="Sök kontakter..." data-contacts-search>
+            </div>
+          </div>
+          <div class="select-wrapper">
+            <select class="form-select form-select--compact" data-contacts-filter-type>
+              <option value="">Alla typer</option>
+            </select>
+          </div>
+          <div class="select-wrapper">
+            <select class="form-select form-select--compact" data-contacts-filter-category>
+              <option value="">Alla kategorier</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="contacts-empty" data-contacts-empty hidden>
+          <div class="empty-state">
+            <div class="empty-icon">
+              {% icon "contacts" %}
+            </div>
+            <p class="text-muted">Inga kontakter ännu. Lägg till din första!</p>
+          </div>
+        </div>
+
+        <div class="contact-cards" data-contact-cards></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Contact card template #}
+<template id="contact-card-template">
+  <details class="surface-card contact-card" data-contact-card-id>
+    <summary class="contact-card-toggle">
+      <div class="contact-card-summary">
+        <div class="contact-card-title-row">
+          <h3 class="contact-card-name" data-contact-card-name></h3>
+          <span class="contact-type-badge" data-contact-card-type></span>
+        </div>
+        <p class="contact-card-organization text-muted" data-contact-card-organization></p>
+      </div>
+    </summary>
+
+    <div class="contact-card-content">
+      <div class="contact-card-info">
+        <div class="contact-info-item" data-contact-card-phone-row>
+          {% icon "phone" %}
+          <a href="" data-contact-card-phone></a>
+        </div>
+        <div class="contact-info-item" data-contact-card-email-row>
+          {% icon "envelope" %}
+          <a href="" data-contact-card-email></a>
+        </div>
+        <div class="contact-info-item" data-contact-card-address-row>
+          {% icon "location-pin" %}
+          <span data-contact-card-address></span>
+        </div>
+      </div>
+
+      <p class="contact-card-notes text-muted" data-contact-card-notes></p>
+
+      <div class="contact-card-footer">
+        <span class="contact-category-badge" data-contact-card-category></span>
+        <div class="contact-card-actions">
+          <button class="button button--ghost button--small" type="button" data-contact-edit>
+            {% icon "pencil" %}
+            Redigera
+          </button>
+          <button class="button button--ghost button--small button--danger" type="button" data-contact-delete>
+            {% icon "trash" %}
+            Radera
+          </button>
+        </div>
+      </div>
+
+      <p class="contact-card-updated text-muted" data-contact-card-updated></p>
+    </div>
+  </details>
+</template>

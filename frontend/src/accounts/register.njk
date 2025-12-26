@@ -1,0 +1,81 @@
+---
+layout: layouts/base.njk
+title: Skapa konto
+description: Skapa ett konto för att spara din profil och dagbok.
+permalink: /accounts/register/
+bodyClass: auth-page
+pageScripts:
+  - /assets/js/api.js
+  - /assets/js/accounts.js
+---
+
+<section class="auth-section">
+  <div class="container">
+    <div class="auth-shell">
+      <div class="surface-card auth-card">
+        <header class="auth-header">
+          <h1>Skapa konto</h1>
+          <p class="subtitle">Ett konto ger dig en trygg plats att samla dina anteckningar.</p>
+        </header>
+
+        <form class="auth-form" data-auth-form="register" novalidate>
+          <div class="form-field">
+            <label for="register-username">Användarnamn</label>
+            <input
+              id="register-username"
+              name="username"
+              type="text"
+              class="form-input"
+              placeholder="t.ex. alex"
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="register-email">E-postadress</label>
+            <input
+              id="register-email"
+              name="email"
+              type="email"
+              class="form-input"
+              placeholder="namn@example.com"
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="register-password">Lösenord</label>
+            <input
+              id="register-password"
+              name="password"
+              type="password"
+              class="form-input"
+              placeholder="Minst 8 tecken"
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="register-password-confirm">Bekräfta lösenord</label>
+            <input
+              id="register-password-confirm"
+              name="password_confirm"
+              type="password"
+              class="form-input"
+              placeholder="Upprepa lösenord"
+            >
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="button button--primary">Skapa konto</button>
+            <a class="button button--ghost" href="/accounts/login/">Jag har redan ett konto</a>
+          </div>
+          <p class="form-hint" data-auth-message></p>
+        </form>
+
+        <div class="auth-footer">
+          <p class="text-muted">
+            Genom att skapa konto godkänner du våra <a href="/viktiga-sidor/anvandarvillkor/">villkor</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

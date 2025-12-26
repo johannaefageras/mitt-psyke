@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-Light.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-Light.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-LightItalic.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-LightItalic.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-Regular.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-Regular.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-RegularItalic.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-RegularItalic.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-RegularItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-Medium.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-Medium.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-MediumItalic.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-MediumItalic.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-SemiBold.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-SemiBold.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-SemiBoldItalic.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-SemiBoldItalic.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-Bold.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-Bold.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pitch';
+  src: url('../../fonts/pitch/Pitch-BoldItalic.woff2') format('woff2'),
+    url('../../fonts/pitch/Pitch-BoldItalic.woff') format('woff'),
+    url('../../fonts/pitch/Pitch-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

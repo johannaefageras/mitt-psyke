@@ -1,0 +1,30 @@
+<div class="search-panel surface-card">
+  <div class="search-header">
+    <h2>Sök bland stödlinjer</h2>
+    <p class="search-subtitle">Filtrera på kategori eller sök på namn, nummer eller beskrivning.</p>
+  </div>
+  
+  <div class="search-input-wrapper">
+    {% icon "search", "search-icon" %}
+    <input 
+      type="search" 
+      id="searchInput" 
+      class="search-input" 
+      placeholder="Sök stödlinje..." 
+      aria-label="Sök bland stödlinjer"
+    >
+  </div>
+  
+  <nav class="category-filters" aria-label="Kategorier">
+    {% for cat in navigation.categories %}
+    <button 
+      class="category-btn{% if cat.key == 'all' %} is-active{% endif %}" 
+      data-category="{{ cat.key }}"
+      aria-pressed="{% if cat.key == 'all' %}true{% else %}false{% endif %}"
+    >
+      {% if cat.icon %}<span class="category-icon">{{ cat.icon }}</span>{% endif %}
+      <span>{{ cat.text }}</span>
+    </button>
+    {% endfor %}
+  </nav>
+</div>

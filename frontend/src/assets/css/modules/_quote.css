@@ -1,0 +1,43 @@
+/* ==========================================================================
+   Quote Section
+   
+   Inspirational quote display.
+   ========================================================================== */
+
+.quote-section {
+  background: var(--accent-light);
+  color: var(--text);
+  padding: var(--space-3xl) 0;
+  margin-top: var(--space-3xl);
+}
+
+@media (max-width: 640px) {
+  .quote-section {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+.quote {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Quote text uses Gooper italic – beautiful and warm */
+.quote p {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-md);
+}
+
+.quote cite {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  opacity: 0.85;
+}

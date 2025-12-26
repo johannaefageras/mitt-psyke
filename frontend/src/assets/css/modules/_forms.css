@@ -1,0 +1,986 @@
+/* ==========================================================================
+   Forms
+
+   Inputs, selects, textareas, form layouts, validation states.
+   ========================================================================== */
+
+/* ==========================================================================
+   Form Layouts
+   ========================================================================== */
+
+.auth-form,
+.journal-form,
+.profile-form {
+  display: grid;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.profile-edit-form {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.form-grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.form-grid .full {
+  grid-column: 1 / -1;
+}
+
+.form-stack {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+/* ==========================================================================
+   Form Fields
+   ========================================================================== */
+
+.form-field,
+.form-group {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.form-field label,
+.form-group label {
+  font-weight: var(--weight-regular); /* Gruffy 400 - labels don't need extra weight */
+  font-size: var(--text-base);
+}
+
+.form-field label .icon-swap,
+.form-group label .icon-swap {
+  font-size: 1.15em;
+}
+
+/* Show solid icons on hover in form fields */
+.form-field:hover .icon-swap .icon--solid,
+.form-group:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.form-field:hover .icon-swap .icon--line,
+.form-group:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Label with icon */
+.form-label-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--space-xs);
+  color: var(--accent);
+}
+
+.form-label-icon .icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   Input, Select, Textarea
+   ========================================================================== */
+
+.form-input,
+.form-select,
+.form-textarea,
+.auth-form input,
+.auth-form textarea,
+.auth-form select,
+.form-card input,
+.form-card textarea,
+.form-card select,
+.journal-form input:not([type='checkbox']):not([type='radio']),
+.journal-form textarea,
+.journal-form select,
+.tags-input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+  background: var(--card);
+  color: var(--text);
+  font-family: var(--font-body);
+  transition: border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* Custom select dropdown arrow using icon font */
+.form-select,
+select.form-select,
+.auth-form select,
+.form-card select,
+.journal-form select,
+.contact-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem;
+  background-image: none;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Select wrapper for positioning */
+.select-wrapper {
+  position: relative;
+  display: block;
+}
+
+.select-wrapper select {
+  width: 100%;
+}
+
+/* Global select styling with custom chevron icon */
+select,
+.form-select,
+.form-select--compact,
+.auth-form select,
+.form-card select,
+.journal-form select,
+.contact-form select,
+.contacts-filters select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem;
+  background-color: var(--card);
+  background-image: none;
+  cursor: pointer;
+}
+
+/* Custom chevron for all selects - use SVG background for consistent positioning */
+.form-field select,
+.form-group select,
+.form-select,
+select,
+.auth-form select,
+.form-card select,
+.journal-form select,
+.contact-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235c5b6a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  cursor: pointer;
+}
+
+/* Hover state - darker chevron */
+.form-field select:hover,
+.form-group select:hover,
+.form-select:hover,
+select:hover,
+.auth-form select:hover,
+.form-card select:hover,
+.journal-form select:hover,
+.contact-form select:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232f2e3a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Dark theme chevron colors */
+:root[data-theme="dark"] .form-field select,
+:root[data-theme="dark"] .form-group select,
+:root[data-theme="dark"] .form-select,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] .auth-form select,
+:root[data-theme="dark"] .form-card select,
+:root[data-theme="dark"] .journal-form select,
+:root[data-theme="dark"] .contact-form select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a9a8b4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .form-field select:hover,
+:root[data-theme="dark"] .form-group select:hover,
+:root[data-theme="dark"] .form-select:hover,
+:root[data-theme="dark"] select:hover,
+:root[data-theme="dark"] .auth-form select:hover,
+:root[data-theme="dark"] .form-card select:hover,
+:root[data-theme="dark"] .journal-form select:hover,
+:root[data-theme="dark"] .contact-form select:hover {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e4e3ed' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--muted-soft);
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus,
+.auth-form input:focus,
+.auth-form textarea:focus,
+.auth-form select:focus,
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus,
+.journal-form input:not([type='checkbox']):not([type='radio']):focus,
+.journal-form textarea:focus,
+.journal-form select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  outline: none;
+}
+
+/* Textarea specific */
+.form-textarea,
+.journal-textarea {
+  min-height: 140px;
+  resize: none;
+}
+
+.form-textarea--small {
+  min-height: auto;
+  resize: none;
+}
+
+/* ==========================================================================
+   Form Hints & Help Text
+   ========================================================================== */
+
+.form-hint,
+.help-text {
+  font-size: var(--text-xs);
+  color: var(--muted-soft);
+  margin: 0;
+  letter-spacing: var(--tracking-wide);
+}
+
+.form-hint--error {
+  color: var(--urgent);
+}
+
+.form-hint--success {
+  color: var(--accent);
+}
+
+.error {
+  color: var(--urgent);
+  font-size: var(--text-sm);
+}
+
+/* ==========================================================================
+   Form Divider
+   ========================================================================== */
+
+.form-divider {
+  height: 1px;
+  background: var(--border);
+  margin: var(--space-sm) 0;
+}
+
+/* ==========================================================================
+   Checkbox & Radio
+   ========================================================================== */
+
+.checkbox-row,
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  cursor: pointer;
+}
+
+.checkbox-label input[type='checkbox'],
+.checkbox-row input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+}
+
+.checkbox-group {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--card-border);
+}
+
+/* ==========================================================================
+   Search Input
+   ========================================================================== */
+
+.support-search,
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.support-search-icon,
+.search-input-wrapper i {
+  position: absolute;
+  left: var(--space-md);
+  color: var(--muted);
+  font-size: 1.1rem;
+  pointer-events: none;
+}
+
+.support-search-input,
+.search-input-wrapper input {
+  width: 100%;
+  padding: var(--space-md) var(--space-md) var(--space-md) calc(var(--space-2xl) + var(--space-xs));
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  background: var(--bg);
+  color: var(--text);
+  font-size: var(--text-base);
+  transition: border-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.support-search-input::placeholder {
+  color: var(--muted-soft);
+}
+
+.support-search-input:hover {
+  border-color: var(--card-border-strong);
+}
+
+.support-search-input:focus,
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* ==========================================================================
+   Filter Form
+   ========================================================================== */
+
+.filter-form {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-group {
+  flex: 1;
+  min-width: 180px;
+}
+
+.filter-form select {
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .filter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+}
+
+/* ==========================================================================
+   Form Card with Header
+   ========================================================================== */
+
+.form-card-header {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.form-card-header h2 {
+  font-size: var(--text-base);
+  margin: 0 0 var(--space-2xs);
+}
+
+.form-card-header .text-muted {
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.form-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--accent-soft);
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.form-card--header {
+  border-left: 4px solid var(--accent);
+}
+
+.form-card--actions {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: var(--space-md) 0;
+}
+
+/* ==========================================================================
+   Avatar Upload
+   ========================================================================== */
+
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.avatar-upload-preview {
+  flex-shrink: 0;
+}
+
+.avatar-upload-controls {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.avatar-upload-controls .text-sm {
+  font-size: var(--text-xs);
+}
+
+@media (max-width: 720px) {
+  .avatar-upload {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   Section Title (form sections)
+   ========================================================================== */
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium); /* Gruffy 500 for section headers */
+  margin: 0;
+}
+
+label.section-title {
+  font-size: var(--text-lg);
+}
+
+.section-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.section-icon .icon-swap {
+  font-size: 1.125rem;
+}
+
+.section-icon .icon {
+  width: 1em;
+  height: 1em;
+}
+
+.form-card:hover .section-icon .icon--line,
+.form-card:focus-within .section-icon .icon--line {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.form-card:hover .section-icon .icon--solid,
+.form-card:focus-within .section-icon .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Section header inline */
+.section-header {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.section-header--inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.section-header--inline .section-title {
+  flex-shrink: 0;
+}
+
+@media (max-width: 820px) {
+  .section-header--inline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   Form Section Card
+   ========================================================================== */
+
+.form-section {
+  padding: var(--space-lg);
+  display: grid;
+  gap: var(--space-md);
+}
+
+/* ==========================================================================
+   Journal Form Wrapper
+   ========================================================================== */
+
+.journal-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.journal-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Form header */
+.journal-form-header {
+  text-align: center;
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.journal-form-header h2 {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--text-xl);
+}
+
+.journal-form-header p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+/* Mood picker - prominent section */
+.journal-form-mood {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--card-strong);
+  border-radius: var(--radius-lg);
+}
+
+.journal-form-mood-label {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--text);
+}
+
+.journal-form-mood .mood-selector {
+  justify-content: center;
+}
+
+/* Main content textarea */
+.journal-form-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.journal-form-content .form-textarea--large {
+  min-height: 160px;
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  resize: none;
+}
+
+/* Collapsible sections */
+.journal-form-section {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.journal-form-section[open] {
+  border-color: var(--card-border-strong);
+}
+
+.journal-form-section-toggle {
+  font-family: 'Gooper';
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-md) !important;
+  padding-left: var(--space-lg);
+  font-weight: var(--weight-medium); /* Gruffy 400 for toggles */
+  font-size: var(--text-base);
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
+  list-style: none;
+}
+
+.journal-form-section-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.journal-form-section-toggle::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  margin-left: auto;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235c5b6a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.journal-form-section[open] .journal-form-section-toggle::after {
+  transform: rotate(180deg);
+}
+
+.journal-form-section-toggle:hover::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%232f2e3a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Dark theme */
+:root[data-theme="dark"] .journal-form-section-toggle::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a9a8b4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="dark"] .journal-form-section-toggle:hover::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e4e3ed' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+.journal-form-section-toggle:hover {
+  background: var(--card-strong);
+  color: var(--text);
+}
+
+.journal-form-section-toggle:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.journal-form-section-toggle:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.journal-form-section-toggle .icon-swap {
+  color: var(--accent);
+  font-size: 1.2em;
+}
+
+.journal-form-section-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  padding-top: 0.75em;
+}
+
+/* Tracking grid inside collapsible */
+.journal-form-tracking-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 500px) {
+  .journal-form-tracking-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Meta row: date, tags, pin */
+.journal-form-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.form-field--inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.form-field--inline label {
+  color: var(--muted);
+  flex-shrink: 0;
+  font-size: var(--text-sm); /* Slightly smaller for inline context */
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+}
+
+.form-field--inline .icon-swap {
+  font-size: 1.25em;
+}
+
+.form-field--grow {
+  flex: 1;
+  min-width: 180px;
+}
+
+.form-input--compact {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--text-sm);
+}
+
+.form-select--compact {
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--text-sm);
+  min-width: 120px;
+}
+
+.form-field--compact {
+  gap: var(--space-2xs);
+}
+
+.form-field--compact label {
+  font-size: var(--text-sm);
+}
+
+/* Input with icon inside (journal date & tags only) */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-with-icon > .input-icon {
+  position: absolute;
+  left: 0.75rem;
+  font-size: 1.1rem;
+  pointer-events: none;
+  z-index: 1;
+  margin-right: 0;
+}
+
+/* Show solid icon on hover/focus */
+.input-with-icon:hover > .input-icon .icon--solid,
+.input-with-icon:focus-within > .input-icon .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.input-with-icon:hover > .input-icon .icon--line,
+.input-with-icon:focus-within > .input-icon .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Padding for the two specific inputs */
+input#journal-date,
+input#journal-tags {
+  padding-left: 2.4rem;
+}
+
+/* Clickable icon (for datepicker) */
+.input-with-icon > .input-icon[data-journal-date-icon] {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.input-with-icon > .input-icon[data-journal-date-icon]:hover .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.input-with-icon > .input-icon[data-journal-date-icon]:hover .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Checkbox pill style */
+.checkbox-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm); /* Slightly smaller for pill context */
+  font-weight: var(--weight-regular); /* Gruffy 400 */
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.checkbox-pill#pin-entry {
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md) var(--space-sm) 0.9em;
+  background: var(--card);
+}
+
+.checkbox-pill#pin-entry span {
+  color: var(--text);
+}
+
+.checkbox-pill:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.checkbox-pill:hover .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.checkbox-pill:hover .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.checkbox-pill:has(input:checked) {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.checkbox-pill input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkbox-pill .icon-swap {
+  font-size: 1.1em;
+}
+
+/* Form actions */
+.journal-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.journal-form-actions .form-message {
+  margin-left: auto;
+  font-size: var(--text-sm);
+}
+
+@media (max-width: 600px) {
+  .journal-form-wrapper {
+    padding: var(--space-lg);
+  }
+
+  .journal-form-mood {
+    padding: var(--space-md);
+  }
+
+  .journal-form-meta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-field--grow {
+    min-width: 100%;
+  }
+
+  .journal-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .journal-form-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .journal-form-actions .form-message {
+    margin-left: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-card {
+    padding: var(--space-md);
+  }
+}
+
+/* ==========================================================================
+   Tag Suggestions (Journal & Contacts)
+   ========================================================================== */
+
+.existing-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) 0;
+}
+
+.existing-tags-label {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  margin-right: var(--space-xs);
+}
+
+.tag-suggestion {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2xs) var(--space-sm);
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-regular);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.tag-suggestion:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+.journal-tags,
+.journal-tag {
+  display: inline-flex;
+  align-items: center;
+}
+
+.journal-tags {
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.journal-tag {
+  padding: var(--space-2xs) var(--space-sm);
+  background: var(--accent-soft);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  color: var(--accent-dark);
+}

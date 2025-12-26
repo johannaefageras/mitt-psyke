@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Buttons
+
+   All button variants and styles.
+   ========================================================================== */
+
+/* ==========================================================================
+   Base Button
+   ========================================================================== */
+
+.button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  font-weight: var(--weight-medium); /* Gruffy 500 - clear button labels */
+  font-size: var(--text-base);
+  letter-spacing: var(--tracking-normal); /* Gruffy is naturally open */
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+/* ==========================================================================
+   Primary Button
+   ========================================================================== */
+
+.button--primary,
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-sm);
+}
+
+.button--primary:hover,
+.btn-primary:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+/* ==========================================================================
+   Secondary Button
+   ========================================================================== */
+
+.button--secondary,
+.btn-secondary {
+  background: var(--card);
+  color: var(--text);
+  border-color: var(--card-border-strong);
+}
+
+.button--secondary:hover,
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark);
+  background: var(--accent-soft);
+}
+
+/* ==========================================================================
+   Ghost Button
+   ========================================================================== */
+
+.button--ghost {
+  background: transparent;
+  color: var(--muted);
+  border-color: transparent;
+}
+
+.button--ghost:hover {
+  color: var(--text);
+}
+
+/* ==========================================================================
+   Danger Button
+   ========================================================================== */
+
+.button--danger,
+.btn-danger {
+  background: var(--urgent);
+  color: #fff;
+  border-color: var(--urgent);
+}
+
+.button--danger:hover,
+.btn-danger:hover {
+  background: rgba(var(--urgent-rgb), 0.85);
+  border-color: rgba(var(--urgent-rgb), 0.85);
+}
+
+/* ==========================================================================
+   Button Sizes
+   ========================================================================== */
+
+.button--sm,
+.btn-small {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--text-sm);
+}
+
+.button--small {
+  padding: var(--space-2xs) var(--space-sm);
+  font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   Button with Icon
+   ========================================================================== */
+
+.button .icon-swap,
+.btn .icon-swap {
+  font-size: 1.1em;
+  margin-right: 0;
+}
+
+.button-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--space-xs);
+}
+
+.button-icon .icon {
+  width: 1em;
+  height: 1em;
+}
+
+/* ==========================================================================
+   Action Button (small icon button)
+   ========================================================================== */
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--card-strong);
+  border: 1px solid var(--card-border);
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), background var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  background: var(--card);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ==========================================================================
+   Form Buttons Container
+   ========================================================================== */
+
+.form-buttons,
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+/* ==========================================================================
+   Form Actions Bar
+   ========================================================================== */
+
+.form-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+}
+
+.form-actions-bar .form-message {
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .form-actions-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-actions-bar .form-actions {
+    justify-content: stretch;
+  }
+
+  .form-actions-bar .form-actions .button,
+  .form-actions-bar .form-actions .btn {
+    flex: 1;
+  }
+}

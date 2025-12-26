@@ -1,0 +1,5 @@
+{
+  "layout": "layouts/important-page.njk",
+  "tags": ["viktig-sida"],
+  "permalink": "/viktiga-sidor/{{ page.fileSlug }}/"
+}

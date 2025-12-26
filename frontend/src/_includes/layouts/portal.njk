@@ -1,0 +1,101 @@
+---
+layout: layouts/base.njk
+---
+
+{# Portal layout för ämnes-sidor (Ångest, Depression, Trauma) #}
+
+<div class="portal-hero">
+  <div class="container">
+    {% icon icon, "portal-icon" %}
+    <h1>{{ title }}</h1>
+    {% if subtitle %}
+    <p class="portal-subtitle">{{ subtitle }}</p>
+    {% endif %}
+
+    {% set rt = readTime or readingTime %}
+    {% if rt or updated %}
+    <p class="portal-meta">
+      {% if rt %}<span class="portal-meta-item">Lästid: {{ rt }}</span>{% endif %}
+      {% if updated %}<span class="portal-meta-item">Uppdaterad: {{ updated | svenskDatum }}</span>{% endif %}
+    </p>
+    {% endif %}
+  </div>
+</div>
+
+<div class="container">
+  {# Akuta linjer #}
+  <section class="urgent-lines" id="akut-hjalp">
+    <h2 class="sr-only">Akut hjälp</h2>
+    <div class="hotline-grid">
+      {% include "partials/hotline-cards.njk" %}
+    </div>
+  </section>
+
+  <div class="portal-layout">
+    {# Portal-specifikt innehåll #}
+    <article class="portal-article prose" id="portal-innehall">
+      {% if description %}
+      <p class="portal-lead">{{ description }}</p>
+      {% endif %}
+      {{ content | safe }}
+
+      {% if references and references.length %}
+      <section class="portal-references" aria-labelledby="portalReferencesTitle">
+        <h2 id="portalReferencesTitle" data-toc-exclude="true">Källor</h2>
+        <ol class="portal-reference-list">
+          {% for ref in references %}
+          <li class="portal-reference-item">{{ ref | mdInline | safe }}</li>
+          {% endfor %}
+        </ol>
+      </section>
+      {% endif %}
+    </article>
+
+    <aside class="portal-aside" aria-label="Sidopanel">
+      <section class="portal-aside-card portal-toc-card" hidden>
+        <h2 class="portal-aside-title">Innehåll</h2>
+        <nav aria-label="Innehåll på sidan">
+          <ol class="portal-toc" id="portalToc"></ol>
+        </nav>
+      </section>
+
+      <section class="portal-aside-card">
+        <h2 class="portal-aside-title">Snabbt</h2>
+        <ul class="portal-aside-links">
+          <li><a href="/portaler/">Alla portaler</a></li>
+          <li><a href="#akut-hjalp">Akut hjälp</a></li>
+          {% set supportOpts = site.supportRelevance or {} %}
+          {% set supportLimit = supportOpts.limit or 6 %}
+          {% set portalSupportlines = supportlines | relevantSupportlines(tags, supportLimit, supportOpts) %}
+          {% if portalSupportlines and portalSupportlines.length %}
+          <li><a href="#stodlinjer-som-kan-hjalpa">Stödlinjer som kan hjälpa</a></li>
+          {% endif %}
+          <li><a href="/stodlinjer/">Alla stödlinjer</a></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+
+  {# Relevanta stödlinjer baserat på portal-tags #}
+  {% if portalSupportlines and portalSupportlines.length %}
+  <section class="related-support" id="stodlinjer-som-kan-hjalpa">
+    <h2>Stödlinjer som kan hjälpa</h2>
+    <div class="support-grid">
+      {% for line in portalSupportlines %}
+      {% include "partials/support-card.njk" %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</div>
+
+{# Citat-sektion #}
+{% set randomQuote = quotes | random %}
+<section class="quote-section">
+  <div class="container">
+    <blockquote class="quote">
+      <p>"{{ randomQuote.text }}"</p>
+      <cite>— {{ randomQuote.author }}</cite>
+    </blockquote>
+  </div>
+</section>

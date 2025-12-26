@@ -1,0 +1,11 @@
+{
+  "main": [
+    { "url": "/", "text": "Hem" },
+    { "url": "/portaler/", "text": "Portaler" },
+    { "url": "/stodlinjer/", "text": "Stödlinjer" }
+  ],
+  "footer": [
+    { "url": "/om/", "text": "Om Mitt Psyke" },
+    { "url": "/kontakt/", "text": "Kontakt" }
+  ]
+}

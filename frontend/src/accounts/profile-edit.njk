@@ -1,0 +1,187 @@
+---
+layout: layouts/base.njk
+title: Redigera profil
+description: Uppdatera dina profiluppgifter.
+permalink: /accounts/profile/edit/
+bodyClass: profile-page
+pageScripts:
+  - /assets/js/api.js
+  - /assets/js/accounts.js
+---
+
+<section class="profile-edit-hero">
+  <div class="container">
+    <a class="back-link" href="/accounts/profile/">
+      {% icon "chevron-left" %}
+      Tillbaka till profilen
+    </a>
+    <h1>Redigera profil</h1>
+    <p class="subtitle">Uppdatera din information för en bättre upplevelse.</p>
+  </div>
+</section>
+
+<section class="profile-section">
+  <div class="container">
+    <div class="profile-edit-layout">
+      <form class="profile-edit-form" data-profile-form="edit" enctype="multipart/form-data">
+
+        <div class="surface-card form-card">
+          <div class="form-card-header">
+            <div>
+              <h2>Profilbild</h2>
+              <p class="text-muted">Välj en bild som representerar dig.</p>
+            </div>
+          </div>
+
+          <div class="avatar-upload">
+            <div class="avatar-upload-preview">
+              <div class="profile-avatar profile-avatar--large" data-profile-avatar aria-hidden="true">A</div>
+            </div>
+            <div class="avatar-upload-controls">
+              <label for="profile-avatar" class="button button--secondary">
+                {% icon "copy-file" %}
+                Välj bild
+              </label>
+              <input
+                id="profile-avatar"
+                name="avatar"
+                type="file"
+                class="sr-only"
+                accept="image/*"
+              >
+              <p class="text-muted text-sm">JPG eller PNG, max 5 MB</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="surface-card form-card">
+          <div class="form-card-header">
+            <div>
+              <h2>Personuppgifter</h2>
+              <p class="text-muted">Grundläggande information om dig.</p>
+            </div>
+          </div>
+
+          <div class="form-stack">
+            <div class="form-field">
+              <label for="profile-display-name">Visningsnamn</label>
+              <input
+                id="profile-display-name"
+                name="displayName"
+                type="text"
+                class="form-input"
+                placeholder="T.ex. Alex"
+              >
+              <p class="form-hint">Detta namn visas på din profil.</p>
+            </div>
+
+            <div class="form-field">
+              <label for="profile-email">E-postadress</label>
+              <input
+                id="profile-email"
+                name="email"
+                type="email"
+                class="form-input"
+                placeholder="namn@example.com"
+              >
+              <p class="form-hint">Används för inloggning och notiser.</p>
+            </div>
+
+            <div class="form-field">
+              <label for="profile-municipality">Kommun/region</label>
+              <select id="profile-municipality" name="municipality" class="form-select">
+                <option value="">Välj kommun/region</option>
+                <option>Blekinge län</option>
+                <option>Dalarnas län</option>
+                <option>Gotlands län</option>
+                <option>Gävleborgs län</option>
+                <option>Hallands län</option>
+                <option>Jämtlands län</option>
+                <option>Jönköpings län</option>
+                <option>Kalmar län</option>
+                <option>Kronobergs län</option>
+                <option>Norrbottens län</option>
+                <option>Skåne län</option>
+                <option>Stockholms län</option>
+                <option>Södermanlands län</option>
+                <option>Uppsala län</option>
+                <option>Värmlands län</option>
+                <option>Västerbottens län</option>
+                <option>Västernorrlands län</option>
+                <option>Västmanlands län</option>
+                <option>Västra Götalands län</option>
+                <option>Örebro län</option>
+                <option>Östergötlands län</option>
+              </select>
+              <p class="form-hint">Hjälper oss visa relevanta lokala resurser.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions-bar">
+          <p class="form-message" data-profile-message></p>
+          <div class="form-actions">
+            <a class="button button--ghost" href="/accounts/profile/">Avbryt</a>
+            <button type="submit" class="button button--primary">
+              {% icon "check" %}
+              Spara ändringar
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <aside class="profile-aside">
+        <div class="surface-card profile-edit-card">
+          <h3 class="section-title">
+            Detaljer som gör skillnad
+          </h3>
+          <p class="text-muted text-sm">
+            Uppdatera profilen för att göra upplevelsen mer personlig.
+          </p>
+          <ul class="profile-edit-tips">
+            <li>
+              <span class="section-icon">{% icon "user" %}</span>
+              <span>Välj ett visningsnamn du känner igen direkt.</span>
+            </li>
+            <li>
+              <span class="section-icon">{% icon "sparkles" %}</span>
+              <span>Profilbilden behöver inte vara du själv, det kan vara vad som helst.</span>
+            </li>
+            <li>
+              <span class="section-icon">{% icon "location-pin" %}</span>
+              <span>Kommunen hjälper oss att visa lokala resurser.</span>
+            </li>
+            <li>
+              <span class="section-icon">{% icon "envelope" %}</span>
+              <span>Håll e-posten aktuell för verifiering och notiser.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="surface-card profile-edit-card">
+          <h3 class="section-title">Snabblänkar</h3>
+          <ul class="portal-aside-links">
+            <li>
+              <a href="/accounts/profile/">
+                {% icon "user" %}
+                Till profilen
+              </a>
+            </li>
+            <li>
+              <a href="/dagbok/">
+                {% icon "notebook" %}
+                Öppna dagboken
+              </a>
+            </li>
+            <li>
+              <a href="/stodlinjer/">
+                {% icon "life-ring-1" %}
+                Hitta stödlinjer
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

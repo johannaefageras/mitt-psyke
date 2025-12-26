@@ -1,0 +1,20 @@
+{
+  "name": "mitt-psyke",
+  "version": "2.0.0",
+  "description": "Ett digitalt samtalsrum för psykisk hälsa",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "debug": "DEBUG=Eleventy* eleventy"
+  },
+  "keywords": [
+    "mental-health",
+    "eleventy",
+    "ai-chat"
+  ],
+  "author": "Robert Claesson",
+  "license": "MIT",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

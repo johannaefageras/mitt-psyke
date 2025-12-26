@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if title %}{{ title }} – {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  {% if pageStyles %}
+    {% for style in pageStyles %}
+      <link rel="stylesheet" href="{{ style }}">
+    {% endfor %}
+  {% endif %}
+  <link rel="stylesheet" href="/assets/css/main.css">
+
+  {% block head %}{% endblock %}
+</head>
+<body class="{{ bodyClass | default('') }}">
+  {% include "partials/header.njk" %}
+
+  <main id="main-content">
+    {% block content %}
+      {{ content | safe }}
+    {% endblock %}
+  </main>
+
+  {% include "partials/footer.njk" %}
+
+  <script src="/assets/js/main.js" defer></script>
+  {% if pageScripts %}
+    {% for script in pageScripts %}
+      <script src="{{ script }}" defer></script>
+    {% endfor %}
+  {% endif %}
+</body>
+</html>

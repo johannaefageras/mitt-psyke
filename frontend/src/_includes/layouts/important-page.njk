@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+---
+
+{# Viktig sida layout för policy-/legala-/informationssidor #}
+
+<section class="important-hero">
+  <div class="container">
+    <div class="important-hero-top">
+      {% if icon %}
+      <span class="important-hero-icon">{% icon icon, "important-hero-icon-glyph" %}</span>
+      {% endif %}
+      <div>
+        <h1>{{ title }}</h1>
+        {% if subtitle %}
+        <p class="important-subtitle">{{ subtitle }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    {% set metaItems = [] %}
+    {% if updated %}{% set metaItems = metaItems.concat([ "Uppdaterad: " + (updated | svenskDatum) ]) %}{% endif %}
+    {% if owner %}{% set metaItems = metaItems.concat([ "Ansvarig: " + owner ]) %}{% endif %}
+    {% if contactEmail %}{% set metaItems = metaItems.concat([ "Kontakt: " + contactEmail ]) %}{% endif %}
+    {% if version %}{% set metaItems = metaItems.concat([ "Version: " + version ]) %}{% endif %}
+
+    {% if metaItems.length %}
+    <p class="important-meta">
+      {% for item in metaItems %}
+      <span class="important-meta-item">{{ item }}</span>
+      {% endfor %}
+    </p>
+    {% endif %}
+
+    {% if description %}
+    <div class="important-lead">{{ description }}</div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="important-content">
+  <div class="container">
+    <article class="prose">
+      {{ content | safe }}
+    </article>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+[
+  {
+    "slug": "psykiskohalsa",
+    "title": "Psykisk Ohälsa",
+    "summary": "Stödlinjer för dig som mår psykiskt dåligt eller behöver någon att prata med i en svår period.",
+    "description": "Samlad och trygg information om stödlinjer för psykisk ohälsa, som ångest, depression, självmordstankar, stress och kris. Här hittar du kontaktvägar till professionellt och ideellt stöd där du kan få prata anonymt, bli lyssnad på och få hjälp att orka vidare, oavsett om situationen är akut eller långvarig.",
+    "icon": "brain"
+  },
+  {
+    "slug": "barn-unga",
+    "title": "Barn & Unga",
+    "summary": "Stödlinjer för barn och unga som mår dåligt, är oroliga eller befinner sig i en svår livssituation.",
+    "description": "Trygg och samlad information om stödlinjer som riktar sig till barn och unga som upplever psykisk ohälsa, utsatthet, ensamhet eller oro. Här finns kontaktvägar till verksamheter där unga kan prata anonymt, få stöd på sina villkor och bli tagna på allvar, både vid akuta situationer och när det som känns svårt har pågått länge.",
+    "icon": "family"
+  },
+  {
+    "slug": "vald",
+    "title": "Våld & Brott",
+    "summary": "Stödlinjer för dig som utsatts för våld, hot, övergrepp eller andra brott, eller som lever i otrygghet.",
+    "description": "Samlad och tydlig information om stödlinjer för personer som utsatts för våld i nära relationer, sexuella övergrepp, hot, trakasserier eller andra brott. Här hittar du kontaktvägar till verksamheter som erbjuder anonymt, tryggt och respektfullt stöd, vägledning kring skydd och rättigheter samt hjälp att hitta vidare stöd när situationen känns osäker eller akut.",
+    "icon": "police-car"
+  },
+  {
+    "slug": "missbruk",
+    "title": "Missbruk",
+    "summary": "Stödlinjer för dig som kämpar med missbruk eller beroende, eller som är orolig för din konsumtion.",
+    "description": "Tydlig och samlad information om stödlinjer för missbruk och beroende av alkohol, droger, läkemedel eller spel. Här finns kontaktvägar till verksamheter som erbjuder anonymt och icke-dömande stöd, råd kring förändring och hjälp att ta första steget mot minskad konsumtion, behandling eller vidare professionellt stöd.",
+    "icon": "wine"
+  },
+  {
+    "slug": "aldre",
+    "title": "Äldre",
+    "summary": "Stödlinjer för äldre personer som upplever ensamhet, psykisk ohälsa eller behöver någon att prata med.",
+    "description": "Samlad och trygg information om stödlinjer för äldre som känner sig ensamma, mår psykiskt dåligt eller befinner sig i en svår livssituation. Här hittar du kontaktvägar till verksamheter som erbjuder samtalsstöd, medmänskligt lyssnande och vägledning, med respekt för livserfarenhet, integritet och individuella behov.",
+    "icon": "old-person-walker"
+  },
+  {
+    "slug": "anhoriga",
+    "title": "Anhöriga",
+    "summary": "Stödlinjer för anhöriga och närstående till någon som mår dåligt eller befinner sig i en svår situation.",
+    "description": "Tydlig och samlad information om stödlinjer för dig som är anhörig eller närstående till någon med psykisk ohälsa, missbruk, beroende, våldsutsatthet eller annan allvarlig problematik. Här finns kontaktvägar till verksamheter som erbjuder råd, samtalsstöd och hjälp att hantera oro, ansvar och gränser, samtidigt som du själv får stöd och avlastning.",
+    "icon": "group"
+  },
+  {
+    "slug": "ovrigt",
+    "title": "Övrigt",
+    "summary": "Stödlinjer som inte passar i en specifik kategori men som erbjuder viktigt stöd i olika livssituationer.",
+    "description": "Samlad information om stödlinjer som rör blandade eller mer specifika behov som inte täcks av övriga kategorier. Här hittar du kontaktvägar till verksamheter som erbjuder samtalsstöd, rådgivning eller vägledning i olika livssituationer, med fokus på tillgänglighet, trygghet och respekt för individens situation.",
+    "icon": "asterisk-2"
+  }
+]

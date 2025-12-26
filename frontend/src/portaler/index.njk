@@ -1,0 +1,23 @@
+---
+layout: layouts/page.njk
+title: Portaler
+subtitle: Välj vad du vill läsa mer om
+permalink: /portaler/
+tags: []
+eleventyExcludeFromCollections: true
+fullWidth: true
+---
+
+<div class="portal-grid">
+  {% for portal in collections.portaler %}
+  <a href="{{ portal.url }}" class="portal-card">
+    <span class="portal-card-icon">{% icon portal.data.icon, "portal-card-icon-glyph" %}</span>
+    <h3>{{ portal.data.title }}</h3>
+    <p class="portal-card-description">{{ portal.data.description | truncateWords(15) }}</p>
+    <span class="portal-card-link">
+      <span>Läs mer</span>
+      {% icon "arrow-right", "portal-card-link-icon" %}
+    </span>
+  </a>
+  {% endfor %}
+</div>

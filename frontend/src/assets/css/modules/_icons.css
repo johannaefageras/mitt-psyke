@@ -1,0 +1,252 @@
+/* ==========================================================================
+   Icons
+
+   Icon swap system using MP Icons font weights.
+   Weight 500 (mpr/Remix) = default state
+   Weight 700 (mps/Solid) = hover/focus/active state
+   ========================================================================== */
+
+/* ==========================================================================
+   Icon Swap System
+
+   Shows remix icon (weight 500) by default, solid (weight 700) on hover/focus/active.
+   Usage:
+   <span class="icon-swap">
+     <i class="mp mpr mp-{name} icon icon--line"></i>
+     <i class="mp mps mp-{name} icon icon--solid"></i>
+   </span>
+   ========================================================================== */
+
+.icon-swap {
+  display: inline-grid;
+  place-items: center;
+  vertical-align: -0.125em;
+  margin-right: 0.35em;
+}
+
+.icon-swap.theme-icon {
+  margin-right: 0 !important;
+}
+
+.icon-swap:last-child {
+  margin-right: 0;
+}
+
+.icon-swap .icon {
+  grid-area: 1 / 1;
+  display: block;
+  /* Icon font inherits font-size, so 1em works naturally */
+  font-size: inherit;
+}
+
+.icon-swap .icon--line,
+.icon-swap .icon--solid {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+/* Solid icon hidden by default */
+.icon-swap .icon--solid {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* Show solid, hide line on hover/focus/active */
+a:hover .icon-swap .icon--solid,
+a:focus-visible .icon-swap .icon--solid,
+button:hover .icon-swap .icon--solid,
+button:focus-visible .icon-swap .icon--solid,
+.is-active .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+a:hover .icon-swap .icon--line,
+a:focus-visible .icon-swap .icon--line,
+button:hover .icon-swap .icon--line,
+button:focus-visible .icon-swap .icon--line,
+.is-active .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Portal Icon (large display icon)
+   ========================================================================== */
+
+.portal-icon {
+  font-size: 3rem;
+  display: inline-grid;
+  place-items: center;
+  margin-bottom: var(--space-md);
+  color: var(--accent);
+}
+
+.portal-icon .icon {
+  grid-area: 1 / 1;
+}
+
+.portal-icon .icon--solid {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+
+.portal-icon .icon--line {
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+
+.portal-icon:hover .icon--solid,
+.portal-icon:focus-visible .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.portal-icon:hover .icon--line,
+.portal-icon:focus-visible .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+@media (max-width: 640px) {
+  .portal-icon {
+    font-size: 2.4rem;
+  }
+}
+
+/* ==========================================================================
+   Important Hero Icon
+   ========================================================================== */
+
+.important-hero-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.16), rgba(var(--accent-rgb), 0.06));
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
+  color: var(--accent);
+  font-size: 1.9rem;
+}
+
+.important-hero-icon .icon {
+  grid-area: 1 / 1;
+}
+
+.important-hero-top:hover .important-hero-icon .icon--line,
+.important-hero-top:focus-within .important-hero-icon .icon--line {
+  opacity: 0;
+  transform: scale(0.96);
+}
+
+.important-hero-top:hover .important-hero-icon .icon--solid,
+.important-hero-top:focus-within .important-hero-icon .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (max-width: 640px) {
+  .important-hero-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+  }
+}
+
+/* ==========================================================================
+   Empty State Icon
+   ========================================================================== */
+
+.empty-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: var(--card-strong);
+  display: grid;
+  place-items: center;
+  color: var(--muted-soft);
+}
+
+.empty-icon .icon {
+  font-size: 2rem;
+}
+
+/* Empty state (centered) */
+.empty-state .empty-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  color: var(--muted-soft);
+  opacity: 0.5;
+}
+
+.empty-state .empty-icon .icon {
+  font-size: 3rem;
+}
+
+/* ==========================================================================
+   Pin Indicator
+   ========================================================================== */
+
+.pin-indicator {
+  color: var(--accent);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   Reflection Icons
+   ========================================================================== */
+
+.reflection-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+}
+
+.reflection-grateful .reflection-icon {
+  background: rgba(var(--urgent-rgb), 0.15);
+  color: var(--urgent);
+}
+
+.reflection-forward .reflection-icon {
+  background: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent-dark);
+}
+
+.reflection-affirmation .reflection-icon {
+  background: rgba(var(--accent-rgb), 0.18);
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Tracking Icons
+   ========================================================================== */
+
+.tracking-label i,
+.tracking-item i {
+  font-size: 0.9rem;
+}
+
+.tracking-label i {
+  color: var(--accent);
+}
+
+.journal-tracking-item .icon-swap {
+  font-size: 0.875rem;
+  color: var(--muted-soft);
+}
+
+/* ==========================================================================
+   Confirm Icon (delete dialogs)
+   ========================================================================== */
+
+.confirm-icon {
+  font-size: 3rem;
+  color: var(--urgent);
+  margin-bottom: var(--space-md);
+}

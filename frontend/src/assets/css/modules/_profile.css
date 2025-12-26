@@ -1,0 +1,378 @@
+/* ==========================================================================
+   Profile Pages
+
+   Profile view, profile edit, avatar, details, meta.
+   ========================================================================== */
+
+/* ==========================================================================
+   Profile Header
+   ========================================================================== */
+
+.profile-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-header h1 {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.profile-header-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.profile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.profile-username {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  margin: var(--space-2xs) 0 0;
+}
+
+/* ==========================================================================
+   Profile Avatar
+   ========================================================================== */
+
+.profile-avatar,
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--card-strong), rgba(var(--accent-rgb), 0.18));
+  display: grid;
+  place-items: center;
+  font-weight: var(--weight-semibold);
+  color: var(--accent);
+  font-size: var(--text-xl);
+  box-shadow: inset 0 0 0 2px rgba(var(--accent-rgb), 0.18);
+  overflow: hidden;
+}
+
+.profile-avatar--large {
+  width: 96px;
+  height: 96px;
+  font-size: var(--text-2xl);
+  box-shadow: inset 0 0 0 3px rgba(var(--accent-rgb), 0.18), 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+  border: 1px solid var(--card-border);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-lg);
+}
+
+.profile-avatar img,
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Profile Card Header
+   ========================================================================== */
+
+.profile-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.profile-identity {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.profile-status {
+  display: grid;
+  justify-items: end;
+  gap: var(--space-sm);
+  text-align: right;
+}
+
+.profile-edit-preview .profile-status {
+  justify-items: start;
+  text-align: left;
+}
+
+@media (max-width: 720px) {
+  .profile-card-header {
+    align-items: flex-start;
+  }
+
+  .profile-status {
+    justify-items: start;
+    text-align: left;
+  }
+}
+
+/* ==========================================================================
+   Profile Details
+   ========================================================================== */
+
+.profile-details {
+  display: grid;
+  gap: var(--space-md);
+  margin: 0;
+}
+
+.profile-detail-item {
+  display: grid;
+  gap: var(--space-2xs);
+}
+
+.profile-detail-item dt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+}
+
+.profile-detail-item dt .icon-swap {
+  font-size: 1rem;
+  color: var(--muted-soft);
+}
+
+.profile-detail-item:hover .icon-swap .icon--solid,
+.profile-detail-item:focus-within .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.profile-detail-item:hover .icon-swap .icon--line,
+.profile-detail-item:focus-within .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.profile-detail-item dd {
+  margin: 0;
+  padding-left: calc(1rem + var(--space-xs));
+  font-size: var(--text-base);
+}
+
+.detail-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.detail-row .label {
+  color: var(--muted);
+  min-width: 120px;
+}
+
+/* ==========================================================================
+   Profile Meta
+   ========================================================================== */
+
+.profile-meta {
+  margin: 0;
+  display: grid;
+  font-size: var(--text-sm);
+  border-top: 1px solid var(--border);
+}
+
+.profile-meta-row {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-meta-row:last-child {
+  border-bottom: none;
+}
+
+.profile-meta-label {
+  color: var(--muted);
+  font-weight: var(--weight-medium);
+  margin: 0;
+}
+
+.profile-meta-value {
+  margin: 0;
+  color: var(--text);
+}
+
+@media (max-width: 720px) {
+  .profile-meta-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   Profile Preview Meta
+   ========================================================================== */
+
+.profile-preview-meta {
+  display: grid;
+  gap: var(--space-sm);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-md);
+  font-size: var(--text-sm);
+}
+
+/* ==========================================================================
+   Profile Verification
+   ========================================================================== */
+
+.profile-verification {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.profile-verification .inline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* ==========================================================================
+   Profile Actions
+   ========================================================================== */
+
+.profile-actions,
+.profile-actions-card {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-actions {
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* ==========================================================================
+   Profile Edit Preview
+   ========================================================================== */
+
+.profile-edit-preview {
+  padding: var(--space-lg);
+  display: grid;
+  gap: var(--space-md);
+}
+
+.profile-edit-preview h2 {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.profile-edit-preview .status-badge {
+  margin-left: 0;
+}
+
+/* ==========================================================================
+   Profile Aside
+   ========================================================================== */
+
+.profile-aside {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.profile-edit-card .section-title {
+  font-size: var(--text-md);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-sm);
+}
+
+.profile-edit-card .text-muted {
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-md);
+}
+
+.profile-edit-tips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.profile-edit-tips li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-sm);
+  align-items: start;
+  font-size: var(--text-sm);
+  line-height: var(--leading-snug);
+  color: var(--muted);
+}
+
+.profile-edit-tips .section-icon {
+  margin-top: 2px;
+}
+
+.profile-edit-tips li:hover .icon-swap .icon--solid,
+.profile-edit-tips li:focus-within .icon-swap .icon--solid {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.profile-edit-tips li:hover .icon-swap .icon--line,
+.profile-edit-tips li:focus-within .icon-swap .icon--line {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Inline Link
+   ========================================================================== */
+
+.inline-link {
+  font-size: var(--text-sm);
+}
+
+.small-link {
+  margin-left: var(--space-sm);
+  font-size: var(--text-sm);
+}
+
+/* ==========================================================================
+   Header Actions (profile header)
+   ========================================================================== */
+
+.header-actions .header-link {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+}
+
+.header-actions .header-link--strong {
+  color: var(--accent);
+}
+
+.header-actions .header-link:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
