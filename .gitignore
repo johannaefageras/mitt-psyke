@@ -192,3 +192,5 @@ icon-names.txt
 _reference/
 .vscode/
 .github/
+.DS_Store
+src/
