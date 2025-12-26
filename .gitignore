@@ -191,7 +191,6 @@ CLAUDE.md
 icon-names.txt
 _reference/
 .vscode/
-.github/
 .DS_Store
 **/.DS_Store
 src/
