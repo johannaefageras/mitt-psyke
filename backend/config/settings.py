@@ -54,7 +54,6 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-    "django_daisy.apps.DefaultAppConfig",
     "django.contrib.humanize",
     "django.contrib.admin",
     'django.contrib.auth',
