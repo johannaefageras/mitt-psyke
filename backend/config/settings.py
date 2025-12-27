@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -17,30 +18,44 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_BUILD_DIR = BASE_DIR.parent / 'frontend' / 'site'
 
 
+def _env_bool(name, default=False):
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return value.strip().lower() in {'1', 'true', 'yes', 'on'}
+
+
+def _env_list(name, default):
+    value = os.getenv(name)
+    if value is None:
+        return default
+    return [item.strip() for item in value.split(',') if item.strip()]
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=4kqdcr6hc(f528m(7nsd2&h_h7&#&6s-uy0!y*hn$8y8)7g3w'
+SECRET_KEY = os.getenv(
+    'SECRET_KEY',
+    'django-insecure-=4kqdcr6hc(f528m(7nsd2&h_h7&#&6s-uy0!y*hn$8y8)7g3w',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = _env_bool('DEBUG', True)
 
-ALLOWED_HOSTS = []
+if os.getenv('ALLOWED_HOSTS'):
+    ALLOWED_HOSTS = _env_list('ALLOWED_HOSTS', [])
+else:
+    render_host = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+    ALLOWED_HOSTS = [render_host] if render_host else []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "unfold",  # before django.contrib.admin
-    "unfold.contrib.filters",  # optional, if special filters are needed
-    "unfold.contrib.forms",  # optional, if special form elements are needed
-    "unfold.contrib.inlines",  # optional, if special inlines are needed
-    "unfold.contrib.import_export",  # optional, if django-import-export package is used
-    "unfold.contrib.guardian",  # optional, if django-guardian package is used
-    "unfold.contrib.simple_history",  # optional, if django-simple-history package is used
-    "unfold.contrib.location_field",  # optional, if django-location-field package is used
-    "unfold.contrib.constance",  # optional, if django-constance package is used
+    "django_daisy.apps.DefaultAppConfig",
+    "django.contrib.humanize",
     "django.contrib.admin",
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,6 +70,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'config.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,10 +103,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+database_path = os.getenv('DATABASE_PATH')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': database_path or (BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -113,15 +130,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8080',
-    'http://localhost:8080',
-]
+if os.getenv('CSRF_TRUSTED_ORIGINS'):
+    CSRF_TRUSTED_ORIGINS = _env_list('CSRF_TRUSTED_ORIGINS', [])
+else:
+    csrf_origins = [
+        'http://127.0.0.1:8080',
+        'http://localhost:8080',
+    ]
+    if os.getenv('RENDER_EXTERNAL_HOSTNAME'):
+        csrf_origins.append(f"https://{os.getenv('RENDER_EXTERNAL_HOSTNAME')}")
+    CSRF_TRUSTED_ORIGINS = csrf_origins
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:8080',
-    'http://localhost:8080',
-]
+if os.getenv('CORS_ALLOWED_ORIGINS'):
+    CORS_ALLOWED_ORIGINS = _env_list('CORS_ALLOWED_ORIGINS', [])
+else:
+    CORS_ALLOWED_ORIGINS = [
+        'http://127.0.0.1:8080',
+        'http://localhost:8080',
+    ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
@@ -139,10 +165,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = []
+STORAGES = {
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+media_root = os.getenv('MEDIA_ROOT')
+MEDIA_ROOT = Path(media_root) if media_root else BASE_DIR / 'media'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'noreply@mittpsyke.se'

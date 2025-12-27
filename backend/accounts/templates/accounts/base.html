@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Mitt Psyke{% endblock %}</title>
+  {% block description %}{% endblock %}
+  <link rel="stylesheet" href="/assets/css/fonts.css">
+  <link rel="stylesheet" href="/assets/css/reset.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body class="auth-page">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="site-logo">
+        Mitt<span>Psyke</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Huvudnavigation">
+        <ul class="nav-list">
+          <li><a href="/" class="nav-link">Hem</a></li>
+          <li><a href="/portaler/" class="nav-link">Portaler</a></li>
+          <li><a href="/stodlinjer/" class="nav-link">Stödlinjer</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/accounts/login/" class="icon-button" aria-label="Logga in" data-auth-nav="login">
+          <span class="icon-swap" aria-hidden="true">
+            <i class="mp mpl mp-login-2 icon icon--line" aria-hidden="true"></i>
+            <i class="mp mps mp-login-2 icon icon--solid" aria-hidden="true"></i>
+          </span>
+        </a>
+        <a href="/accounts/profile/" class="icon-button" aria-label="Min profil" data-auth-nav="profile" hidden>
+          <span class="icon-swap" aria-hidden="true">
+            <i class="mp mpl mp-user icon icon--line" aria-hidden="true"></i>
+            <i class="mp mps mp-user icon icon--solid" aria-hidden="true"></i>
+          </span>
+        </a>
+
+        <span class="header-separator"></span>
+
+        <button class="theme-toggle" id="themeToggle" aria-label="Byt tema">
+          <span class="icon-swap theme-icon sun" aria-hidden="true">
+            <i class="mp mpl mp-sun icon icon--line" aria-hidden="true"></i>
+            <i class="mp mps mp-sun icon icon--solid" aria-hidden="true"></i>
+          </span>
+          <span class="icon-swap theme-icon moon" aria-hidden="true">
+            <i class="mp mpl mp-moon icon icon--line" aria-hidden="true"></i>
+            <i class="mp mps mp-moon icon icon--solid" aria-hidden="true"></i>
+          </span>
+        </button>
+
+        <button class="nav-toggle" aria-label="Öppna meny" aria-expanded="false">
+          <span class="hamburger"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="copyright">Upphovsrätt © 2025 Mitt Psyke</p>
+        <p class="disclaimer">
+          Mitt Psyke är en informationssida och ersätter inte professionell vård.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/main.js" defer></script>
+</body>
+</html>

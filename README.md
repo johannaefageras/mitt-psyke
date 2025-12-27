@@ -45,6 +45,29 @@ python backend/manage.py import_quotes --replace
 python backend/manage.py runserver
 ```
 
+### Backend (Gunicorn)
+
+```bash
+pip install -r backend/requirements.txt
+gunicorn -c backend/gunicorn.conf.py
+```
+
+Gunicorn settings can be overridden with `GUNICORN_BIND`, `GUNICORN_WORKERS`,
+`GUNICORN_THREADS`, `GUNICORN_TIMEOUT`, and `GUNICORN_LOG_LEVEL`.
+
+### Deploy on Render
+
+This repo includes `render.yaml` for a managed deploy. It provisions a small
+disk for SQLite + media, runs migrations, collects static files, and starts
+Gunicorn.
+
+If your frontend is hosted elsewhere, set `CORS_ALLOWED_ORIGINS` to the
+frontend origin and add it to `CSRF_TRUSTED_ORIGINS`.
+
+If you want Django to serve the Eleventy output on Render, build
+`frontend/site` during the deploy (requires Node 18+) or host the frontend
+separately.
+
 ### Frontend
 
 ```bash

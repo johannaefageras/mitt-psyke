@@ -28,8 +28,10 @@
   </main>
 
   {% include "partials/footer.njk" %}
+  {% include "partials/chatbot.njk" %}
 
   <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/chatbot.js" defer></script>
   {% if pageScripts %}
     {% for script in pageScripts %}
       <script src="{{ script }}" defer></script>

@@ -37,6 +37,7 @@
 @import url('./modules/_contacts.css');
 @import url('./modules/_quote.css');
 @import url('./modules/_flatpickr.css');
+@import url('./modules/_chatbot.css');
 
 /* Utilities */
 @import url('./modules/_utilities.css');

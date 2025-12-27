@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: mitt-psyke-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: python backend/manage.py migrate && python backend/manage.py collectstatic --noinput && gunicorn -c backend/gunicorn.conf.py
+    disk:
+      name: mitt-psyke-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_PATH
+        value: /var/data/db.sqlite3
+      - key: MEDIA_ROOT
+        value: /var/data/media

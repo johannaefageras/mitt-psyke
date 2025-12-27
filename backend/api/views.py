@@ -1,10 +1,17 @@
 import json
+import logging
+import os
+import urllib.error
+import urllib.request
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db.models import Count, Q
 from django.http import JsonResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_http_methods
 
 from accounts.forms import CustomUserCreationForm
@@ -14,11 +21,119 @@ from contacts.forms import ContactForm
 from contacts.models import Contact, ContactCategory
 from journal.forms import JournalEntryForm
 from journal.models import JournalEntry, JournalTag
+from .chat_prompt import SYSTEM_PROMPT
 from .models import Hotline, Quote, SupportLine, SupportLineCategory
+
+logger = logging.getLogger(__name__)
 
 
 def _json_response(payload):
     return JsonResponse(payload, safe=False, json_dumps_params={'ensure_ascii': False})
+
+
+_OPENAI_API_KEY = None
+
+
+def _load_openai_api_key():
+    global _OPENAI_API_KEY
+    if _OPENAI_API_KEY:
+        return _OPENAI_API_KEY
+
+    api_key = os.environ.get('OPENAI_API_KEY')
+    if api_key:
+        _OPENAI_API_KEY = api_key
+        return api_key
+
+    env_path = settings.BASE_DIR.parent / '.env'
+    if not env_path.exists():
+        return None
+
+    try:
+        for line in env_path.read_text(encoding='utf-8').splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith('#') or '=' not in stripped:
+                continue
+            key, value = stripped.split('=', 1)
+            if key.strip() == 'OPENAI_API_KEY':
+                api_key = value.strip().strip('"').strip("'")
+                if api_key:
+                    _OPENAI_API_KEY = api_key
+                return api_key
+    except OSError:
+        return None
+
+    return None
+
+
+def _format_chat_context(context, external_sources):
+    lines = []
+
+    if context:
+        lines.append('## Relevant innehåll från sajten:')
+        lines.append('')
+        for item in context:
+            if not isinstance(item, dict):
+                continue
+            title = item.get('title') or 'Okänd källa'
+            lines.append(f'### {title}')
+            type_label = item.get('type') or 'okänd'
+            type_line = f'Typ: {type_label}'
+            category = item.get('category')
+            if category:
+                type_line += f' | Kategori: {category}'
+            lines.append(type_line)
+            content = item.get('content')
+            if content:
+                lines.append(str(content))
+            lines.append('')
+
+    if external_sources:
+        lines.append('## Stödlinjer och resurser:')
+        lines.append('')
+        for source in external_sources:
+            if not isinstance(source, dict):
+                continue
+            title = source.get('title') or source.get('name') or 'Källa'
+            lines.append(f'### {title}')
+            phone = source.get('phone')
+            if phone:
+                lines.append(f'Telefon: {phone}')
+            url = source.get('url')
+            if url:
+                lines.append(f'Webb: {url}')
+            hours = source.get('hoursLabel') or source.get('hours')
+            if hours:
+                lines.append(f'Öppettider: {hours}')
+            contact_types = source.get('contactTypes')
+            if isinstance(contact_types, (list, tuple)) and contact_types:
+                lines.append(f'Kontaktvägar: {", ".join(contact_types)}')
+            lines.append('')
+
+    return '\n'.join(lines).strip()
+
+
+def _build_chat_messages(messages, context_text):
+    openai_messages = [{'role': 'system', 'content': SYSTEM_PROMPT}]
+
+    if context_text:
+        now = datetime.now(ZoneInfo('Europe/Stockholm')).strftime('%Y-%m-%d %H:%M:%S')
+        time_info = f'Aktuell tid i Sverige: {now}\n\n'
+        openai_messages.append({'role': 'system', 'content': time_info + context_text})
+
+    for msg in messages:
+        if not isinstance(msg, dict):
+            continue
+        role = msg.get('role')
+        if role == 'bot':
+            role = 'assistant'
+        if role not in ('user', 'assistant'):
+            continue
+        content = msg.get('content')
+        if content is None:
+            continue
+        openai_messages.append({'role': role, 'content': str(content)})
+
+    return openai_messages
 
 
 def _serialize_support_line(line):
@@ -305,6 +420,92 @@ def quotes(request):
     entries = Quote.objects.filter(active=True).order_by('order', 'id')
     payload = [_serialize_quote(entry) for entry in entries]
     return _json_response(payload)
+
+
+@csrf_exempt
+@require_http_methods(['POST'])
+def chatbot(request):
+    payload = _parse_payload(request)
+    if payload is None or not isinstance(payload, dict):
+        return JsonResponse({'detail': 'Invalid JSON.'}, status=400)
+
+    messages = payload.get('messages')
+    if not isinstance(messages, list) or not messages:
+        return JsonResponse({'detail': 'Invalid payload.'}, status=400)
+
+    context = payload.get('context')
+    if not isinstance(context, list):
+        context = []
+
+    external_sources = payload.get('externalSources')
+    if not isinstance(external_sources, list):
+        external_sources = []
+
+    api_key = _load_openai_api_key()
+    if not api_key:
+        logger.error('OPENAI_API_KEY saknas')
+        return JsonResponse({'error': 'Server configuration error'}, status=500)
+
+    context_text = _format_chat_context(context, external_sources)
+    openai_messages = _build_chat_messages(messages, context_text)
+
+    request_payload = {
+        'model': 'gpt-4o',
+        'messages': openai_messages,
+        'temperature': 0.7,
+        'max_tokens': 1000,
+    }
+
+    data = None
+    try:
+        req = urllib.request.Request(
+            'https://api.openai.com/v1/chat/completions',
+            data=json.dumps(request_payload).encode('utf-8'),
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {api_key}',
+            },
+            method='POST',
+        )
+        with urllib.request.urlopen(req, timeout=30) as response:
+            body = response.read().decode('utf-8')
+        data = json.loads(body)
+    except urllib.error.HTTPError as err:
+        error_body = err.read().decode('utf-8', errors='replace')
+        logger.error('OpenAI API error: %s', error_body)
+        return JsonResponse({'error': 'AI service error'}, status=err.code or 502)
+    except urllib.error.URLError as err:
+        logger.error('OpenAI API error: %s', err)
+        return JsonResponse({'error': 'AI service error'}, status=502)
+    except json.JSONDecodeError as err:
+        logger.error('OpenAI API invalid JSON: %s', err)
+        return JsonResponse({'error': 'AI service error'}, status=502)
+    except Exception as err:
+        logger.exception('Function error: %s', err)
+        return JsonResponse({'error': 'Internal server error'}, status=500)
+
+    answer = (
+        data.get('choices', [{}])[0]
+        .get('message', {})
+        .get('content')
+        if isinstance(data, dict)
+        else None
+    )
+    if not answer:
+        answer = 'Jag kunde inte generera ett svar.'
+
+    sources = []
+    for item in context:
+        if not isinstance(item, dict):
+            continue
+        item_copy = dict(item)
+        item_copy['url'] = item_copy.get('url') or None
+        sources.append(item_copy)
+
+    return _json_response({
+        'answer': answer,
+        'sources': sources,
+    })
 
 
 @require_GET

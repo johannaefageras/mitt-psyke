@@ -6,6 +6,7 @@ app_name = 'api'
 
 urlpatterns = [
     path('v1/csrf/', views.csrf, name='csrf'),
+    path('chat/', views.chatbot, name='chatbot'),
     path('v1/auth/login/', views.auth_login, name='auth_login'),
     path('v1/auth/logout/', views.auth_logout, name='auth_logout'),
     path('v1/auth/register/', views.auth_register, name='auth_register'),
